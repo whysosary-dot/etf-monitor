@@ -590,9 +590,10 @@ function renderRow(s){
       const ticker = s.ticker || '';
       const isKorean = ticker.endsWith('.KS') || ticker.endsWith('.KQ');
       const tickerCode = ticker.split('.')[0];
-      const naverUrl = isKorean
-        ? `https://m.stock.naver.com/domestic/stock/${tickerCode}/total`
-        : `https://m.stock.naver.com/worldstock/etf/${ticker}.O/total`;
+      // Use resolved Naver path/code if available (etfs.json), else fall back
+      const navPath = s.naver_path || (isKorean ? 'domestic/stock' : 'worldstock/etf');
+      const navCode = s.naver_code || (isKorean ? tickerCode : ticker);
+      const naverUrl = `https://m.stock.naver.com/${navPath}/${navCode}/total`;
 
       const wrap = document.createElement('div');
       wrap.className = 'name-wrap';
@@ -932,6 +933,8 @@ async function commitToGithub(){
         name: e.name, ticker: e.ticker, category: e.category, description: e.description, sector: e.sector,
         currency: e.currency, price_native: e.price_native, price_change_pct: e.price_change_pct,
         price_history: e.price_history, price_history_3y: e.price_history_3y,
+        price_history_3m: e.price_history_3m || [],
+        naver_code: e.naver_code, naver_path: e.naver_path,
         favorite: !!e.favorite, memo: e.memo || '',
       })),
     };
