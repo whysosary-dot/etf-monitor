@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+etfs_ckpt.json
+.DS_Store

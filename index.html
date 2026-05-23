@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ETF Monitor</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="ETF" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="theme-color" content="#000000" />
+<style>
+  :root {
+    --bg: #f7f9fc;
+    --panel: #ffffff;
+    --panel-2: #f2f4f8;
+    --border: #e3e7ee;
+    --border-strong: #cfd5de;
+    --text: #1f2933;
+    --text-dim: #6b7480;
+    --accent: #2563eb;
+    --accent-soft: #eaf1fe;
+    --blue: #2563eb;
+    --red: #b91c1c;
+    --header: #f0f3f8;
+    --row-hover: #f6f8fc;
+    --focus: #dbe8fe;
+    --readonly: #fafbfd;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .topbar {
+    flex: none;
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .topbar h1 {
+    margin: 0; font-size: 18px; font-weight: 600;
+    display: flex; align-items: center; gap: 9px;
+    white-space: nowrap;
+  }
+  .topbar h1 .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: none; }
+  .topbar .spacer { flex: 1; min-width: 0; }
+  .topbar .meta {
+    color: var(--text-dim); font-size: 14px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .topbar input.filter {
+    background: var(--panel); border: 1px solid var(--border-strong); color: var(--text);
+    padding: 9px 12px; border-radius: 6px; width: 220px; font-size: 15px;
+    transition: border-color .15s, box-shadow .15s;
+    min-width: 0;
+  }
+  .topbar input.filter:focus {
+    outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--focus);
+  }
+  .btn {
+    background: var(--panel); border: 1px solid var(--border-strong); color: var(--text);
+    padding: 9px 14px; border-radius: 6px; cursor: pointer; font-size: 14px;
+    transition: background .15s, border-color .15s;
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--panel-2); border-color: var(--accent); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn.toggle-on {
+    background: var(--accent-soft); border-color: var(--accent); color: var(--accent);
+  }
+  .btn.fav-on {
+    background: #fff7d6; border-color: #d4a017; color: #8b6914;
+  }
+  .toast {
+    position: fixed; right: 16px; bottom: 16px;
+    background: var(--panel); border: 1px solid var(--border-strong);
+    padding: 12px 16px; border-radius: 6px;
+    color: var(--text); font-size: 14px; z-index: 100;
+    max-width: 420px; box-shadow: 0 8px 24px rgba(15,23,42,0.12);
+    opacity: 0; transform: translateY(10px); transition: all .2s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.ok { border-color: #c4e5cf; background: #f1faf4; }
+  .toast.err { border-color: #f3c4c4; background: #fdf1f1; }
+
+  .table-wrap {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px;
+  }
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  th, td {
+    padding: 11px 13px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    font-size: 15px;
+  }
+  th:last-child, td:last-child { border-right: none; }
+  tbody tr:last-child td { border-bottom: none; }
+  thead th {
+    background: var(--header);
+    position: sticky; top: 0; z-index: 3;
+    font-weight: 600;
+    color: #4a5568;
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+    text-align: center;
+  }
+  thead th.sorted-asc::after { content: " ▲"; color: var(--accent); font-size: 12px; }
+  thead th.sorted-desc::after { content: " ▼"; color: var(--accent); font-size: 12px; }
+  th.text-left, td.text-left { text-align: left; }
+  th.text-center, td.text-center { text-align: center; }
+  tbody tr { background: var(--panel); }
+  tbody tr:hover { background: var(--row-hover); }
+  tbody td { background: var(--panel); }
+  tbody td.readonly-cell { background: var(--readonly); }
+
+  /* memo cell */
+  td.memo-cell { min-width: 320px; max-width: 480px; padding: 4px 6px; vertical-align: middle; text-align: left; }
+  .memo-wrap { display: flex; align-items: center; gap: 4px; width: 100%; }
+  textarea.cell-text {
+    background: transparent; border: 1px solid transparent; color: var(--text);
+    padding: 4px 6px; border-radius: 4px; width: 100%;
+    font: inherit; font-size: 14px; text-align: left;
+    resize: none; overflow: hidden;
+    line-height: 1.4;
+    transition: height 0.12s ease;
+    white-space: pre-wrap; word-break: break-all;
+    box-sizing: border-box;
+  }
+  textarea.cell-text:focus {
+    outline: none; border-color: var(--accent); background: white;
+    box-shadow: 0 0 0 3px var(--focus);
+  }
+  textarea.cell-text::placeholder { color: #aab2bd; }
+  .memo-toggle {
+    flex-shrink: 0; background: none; border: none; cursor: pointer;
+    color: var(--text-dim); font-size: 13px; padding: 3px 2px; line-height: 1;
+    opacity: 0.5; transition: opacity 0.15s, color 0.15s;
+    margin-top: 2px;
+  }
+  .memo-toggle:hover { opacity: 1; color: var(--accent); }
+  .memo-toggle.expanded { opacity: 0.8; }
+  .memo-toggle.has-content { color: var(--accent); opacity: 1; }
+  .line-badge {
+    flex-shrink: 0;
+    font-size: 11px; font-weight: 600;
+    background: var(--accent-soft); color: var(--accent);
+    border-radius: 999px; padding: 2px 7px;
+    margin-top: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  td.chart-cell { width: 130px; min-width: 130px; padding: 6px 8px; text-align: center; }
+  td.chart-cell svg { display: block; margin: 0 auto; }
+
+  .readonly-cell { color: var(--text); font-weight: 500; }
+  .readonly-cell.name { font-weight: 600; }
+  .readonly-cell.name a { color: inherit; text-decoration: none; }
+  .readonly-cell.name a:hover { color: var(--accent); text-decoration: underline; }
+
+  .num { font-variant-numeric: tabular-nums; }
+  .up { color: var(--blue); font-weight: 600; }
+  .down { color: var(--red); font-weight: 600; }
+  .dim { color: var(--text-dim); }
+
+  .empty { padding: 40px; text-align: center; color: var(--text-dim); }
+
+  /* sector chip */
+  td.sector-cell { padding: 8px 10px; text-align: center; }
+  span.sector-tag {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 3px 11px;
+    font-size: 13px; font-weight: 500;
+    color: var(--text); background-color: var(--panel-2);
+    white-space: nowrap;
+  }
+  /* category chip — for 분류 (국가/지역, 섹터/테마, 한국 ETF) */
+  td.cat-cell { padding: 8px 10px; text-align: center; }
+  span.cat-tag {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 12px; font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  span.cat-tag.cat-국가-지역 { background: #eef4ff; color: #1e40af; border-color: #c7d6f7; }
+  span.cat-tag.cat-섹터-테마 { background: #f3e8ff; color: #6b21a8; border-color: #ddc6f7; }
+  span.cat-tag.cat-한국-ETF { background: #ffe8e8; color: #9b1c1c; border-color: #f7c6c6; }
+
+  /* group header */
+  tr.group-row td {
+    border-top: 1px solid var(--border-strong);
+    border-bottom: 1px solid var(--border-strong);
+    padding: 11px 13px 11px 18px;
+    font-weight: 700;
+    color: var(--text);
+    font-size: 14px;
+    box-shadow: inset 5px 0 0 var(--border-strong);
+  }
+  tr.group-row .group-name { display: inline-flex; align-items: center; gap: 8px; }
+  tr.group-row .group-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: currentColor; opacity: 0.95;
+  }
+  tr.group-row .group-meta {
+    color: var(--text-dim); font-weight: 500; margin-left: 10px; font-size: 13px;
+  }
+  tbody.grouped tr:not(.group-row) td:first-child {
+    box-shadow: inset 3px 0 0 transparent;
+    padding-left: 16px;
+  }
+
+  /* select */
+  .topbar select.sector-filter, .topbar select.cat-filter {
+    background: var(--panel); border: 1px solid var(--border-strong); color: var(--text);
+    padding: 9px 30px 9px 12px; border-radius: 6px; font-size: 14px;
+    appearance: none; -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-dim) 50%),
+                      linear-gradient(135deg, var(--text-dim) 50%, transparent 50%);
+    background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%;
+    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+    cursor: pointer; min-width: 0;
+  }
+  .topbar select:focus {
+    outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--focus);
+  }
+
+  /* sticky cols */
+  th.col-sticky, td.col-sticky {
+    position: sticky;
+    z-index: 1;
+  }
+  thead th.col-sticky {
+    z-index: 4;
+    background: var(--header);
+  }
+  tbody td.col-sticky { background: var(--panel); }
+  tbody td.col-sticky.readonly-cell { background: var(--readonly); }
+  tbody tr:hover td.col-sticky,
+  tbody tr:hover td.col-sticky.readonly-cell { background: var(--row-hover); }
+  th.col-sticky-end, td.col-sticky-end {
+    border-right: 2px solid var(--border-strong) !important;
+    box-shadow: 3px 0 8px -3px rgba(15,23,42,0.10);
+  }
+
+  /* name+star */
+  .name-wrap { display: inline-flex; align-items: center; gap: 6px; }
+  .star-btn {
+    background: none; border: none; cursor: pointer;
+    color: #cbd2dc; font-size: 18px; padding: 0 2px; line-height: 1;
+    transition: color .15s, transform .12s;
+  }
+  .star-btn:hover { color: #f5b800; transform: scale(1.1); }
+  .star-btn.active { color: #f5b800; }
+
+  /* GitHub commit btn */
+  .gh-commit-btn {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--accent); color: #fff; border: none;
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    font-size: 13px; font-weight: 600; white-space: nowrap;
+    transition: opacity .15s, background .15s;
+  }
+  .gh-commit-btn:hover { opacity: .88; }
+  .gh-commit-btn:disabled { opacity: .5; cursor: not-allowed; }
+  .gh-settings-btn {
+    background: none; border: 1px solid var(--border-strong); cursor: pointer; font-size: 14px;
+    color: var(--text-dim); padding: 7px 10px; border-radius: 6px;
+    transition: color .15s, background .15s;
+    line-height: 1;
+  }
+  .gh-settings-btn:hover { color: var(--accent); background: var(--accent-soft); }
+
+  /* PAT modal */
+  .modal-bg {
+    position: fixed; inset: 0; background: rgba(15,23,42,0.45);
+    display: none; align-items: center; justify-content: center; z-index: 200;
+  }
+  .modal-bg.show { display: flex; }
+  .modal-card {
+    background: var(--panel); border-radius: 12px; padding: 22px 24px 20px;
+    width: min(440px, 92%); box-shadow: 0 16px 48px rgba(15,23,42,0.25);
+  }
+  .modal-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; font-size: 16px; font-weight: 700; }
+  .modal-close { background: none; border: none; cursor: pointer; font-size: 18px; color: var(--text-dim); }
+  .modal-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 12px; }
+  .modal-desc a { color: var(--accent); }
+  .pat-inp {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong);
+    border-radius: 7px; font-size: 14px; font-family: monospace;
+    background: var(--panel); color: var(--text);
+  }
+  .pat-inp:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--focus); }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+
+  /* mobile */
+  @media (max-width: 720px) {
+    .topbar { gap: 8px; padding: 10px 12px; }
+    .topbar h1 { font-size: 16px; }
+    .topbar input.filter { width: 160px; font-size: 14px; }
+    .topbar .meta { display: none; }
+    th, td { padding: 8px 9px; font-size: 13px; }
+    td.chart-cell { width: 90px; min-width: 90px; }
+    td.memo-cell { min-width: 200px; max-width: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1><span class="dot"></span>ETF Monitor</h1>
+  <span class="meta" id="meta"></span>
+  <span class="spacer"></span>
+  <input id="filter" class="filter" placeholder="검색 (이름·티커·설명)" />
+  <select id="cat-filter" class="cat-filter" title="분류 필터"></select>
+  <select id="sector-filter" class="sector-filter" title="섹터 필터"></select>
+  <button id="group-toggle" class="btn" title="섹터별 그룹">📂 그룹</button>
+  <button id="fav-filter-btn" class="btn" title="즐겨찾기만">⭐ 즐겨</button>
+  <button id="gh-commit-btn" class="gh-commit-btn" title="메모/즐겨찾기 GitHub에 커밋">☁️ 커밋</button>
+  <button id="gh-settings-btn" class="gh-settings-btn" title="GitHub PAT 설정">⚙️</button>
+</div>
+
+<div class="table-wrap">
+  <table id="tbl">
+    <thead><tr id="header-row"></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- PAT 설정 모달 -->
+<div class="modal-bg" id="pat-modal">
+  <div class="modal-card">
+    <div class="modal-title">
+      <span>🔑 GitHub 토큰 설정</span>
+      <button class="modal-close" id="pat-close">✕</button>
+    </div>
+    <div class="modal-desc">
+      메모와 즐겨찾기를 GitHub에 커밋하려면 Personal Access Token(PAT)이 필요합니다.<br>
+      토큰은 <b>이 기기의 브라우저(localStorage)에만</b> 저장되며 외부로 전송되지 않습니다.<br>
+      <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener">→ GitHub에서 PAT 발급</a> (권한: <code>repo</code> 체크)
+    </div>
+    <input type="password" id="pat-input" class="pat-inp" placeholder="ghp_..." autocomplete="off"/>
+    <div class="modal-actions">
+      <button class="btn" id="pat-clear">삭제</button>
+      <button class="btn" id="pat-save" style="background:var(--accent);color:#fff;border-color:var(--accent);">저장</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── 설정 ─── */
+const GH = {
+  OWNER: 'whysosary-dot',
+  REPO:  'etf-monitor',
+  PATH:  'etfs.json',
+  BRANCH:'main',
+};
+const LS_USER  = 'em_user_inputs_v1';
+const LS_UI    = 'em_ui_v1';
+const LS_PAT   = 'em_github_pat';
+
+const USER_FIELDS = ['memo', 'favorite'];
+
+const CATS = ['국가/지역', '섹터/테마', '한국 ETF'];
+const SECTOR_UNCATEGORIZED = '미분류';
+
+/* ─── 컬럼 ─── */
+const COLS = [
+  { key: 'name',             label: 'ETF 명칭',  type: 'ro-name',  sortable: true,  align: 'left' },
+  { key: 'ticker',           label: '티커',      type: 'ro-text',  sortable: true,  align: 'center' },
+  { key: 'category',         label: '분류',      type: 'category', sortable: true,  align: 'center' },
+  { key: 'sector',           label: '섹터',      type: 'sector',   sortable: true,  align: 'center' },
+  { key: 'description',      label: '투자 대상', type: 'ro-text',  sortable: false, align: 'left' },
+  { key: 'price_change_pct', label: '등락률',    type: 'change-pct', sortable: true, align: 'center' },
+  { key: '_chart3y',         label: '3년 차트',  type: 'chart3y',  sortable: false, align: 'center' },
+  { key: '_chart',           label: '1년 차트',  type: 'chart',    sortable: false, align: 'center' },
+  { key: 'price_native',     label: '현재가',    type: 'current-price', sortable: true, align: 'right' },
+  { key: 'memo',             label: '메모',      type: 'text',     sortable: false, align: 'left' },
+];
+
+/* ─── Sparkline ─── */
+function renderSparkline(prices, w=120, h=40) {
+  if (!prices || prices.length < 2) return `<svg width="${w}" height="${h}"></svg>`;
+  const min = Math.min(...prices), max = Math.max(...prices);
+  const range = max - min || 1;
+  const pad = 2;
+  const xs = prices.map((_, i) => pad + (i / (prices.length - 1)) * (w - pad * 2));
+  const ys = prices.map(p => h - pad - ((p - min) / range) * (h - pad * 2));
+  const path = xs.map((x, i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+  const color = prices[prices.length - 1] >= prices[0] ? '#b91c1c' : '#2563eb';
+  const areaPath = path + ` L${xs[xs.length-1].toFixed(1)},${h-pad} L${xs[0].toFixed(1)},${h-pad} Z`;
+  const fillColor = prices[prices.length - 1] >= prices[0] ? 'rgba(185,28,28,0.08)' : 'rgba(37,99,235,0.08)';
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <path d="${areaPath}" fill="${fillColor}" stroke="none"/>
+    <path d="${path}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+  </svg>`;
+}
+
+/* ─── 상태 ─── */
+let state = {
+  etfs: [],
+  updated_at: '',
+  filter: '',
+  catFilter: '',
+  sectorFilter: '',
+  groupBySector: false,
+  favoriteOnly: false,
+  sortKey: 'price_change_pct',
+  sortDir: 'desc',
+};
+
+function loadUi(){ try { return JSON.parse(localStorage.getItem(LS_UI) || '{}') || {}; } catch { return {}; } }
+function saveUi(){ localStorage.setItem(LS_UI, JSON.stringify({
+  catFilter: state.catFilter, sectorFilter: state.sectorFilter,
+  groupBySector: state.groupBySector, favoriteOnly: state.favoriteOnly,
+})); }
+
+function normSector(v){ const s=(v==null?'':String(v)).trim(); return s||SECTOR_UNCATEGORIZED; }
+
+function _hashName(name){ let h=0; for(let i=0;i<name.length;i++){h=(Math.imul(31,h)+name.charCodeAt(i))|0;} h^=h>>>16; h=Math.imul(h,0x85ebca6b); h^=h>>>13; h=Math.imul(h,0xc2b2ae35); h^=h>>>16; return h>>>0; }
+const GOLDEN_ANGLE = 137.508;
+function buildSectorHueMap(){
+  const names = new Set();
+  for(const s of state.etfs){ const n = normSector(s.sector); if(n!==SECTOR_UNCATEGORIZED) names.add(n); }
+  const list = [...names].sort((a,b)=>_hashName(a)-_hashName(b));
+  const map = new Map();
+  list.forEach((name,idx)=>map.set(name,(idx*GOLDEN_ANGLE)%360));
+  state._sectorHueMap = map;
+}
+function sectorHue(name){
+  if(!name||name===SECTOR_UNCATEGORIZED) return null;
+  const m=state._sectorHueMap;
+  if(m&&m.has(name)) return m.get(name);
+  return _hashName(name)%360;
+}
+function sectorColors(name){
+  const hue = sectorHue(name);
+  if(hue===null) return { bg:'#f1f3f7', fg:'#94a3b8', bar:'#cfd5de', headerBg:'#f5f7fb' };
+  return {
+    bg: `hsl(${hue},72%,92%)`, fg:`hsl(${hue},50%,27%)`,
+    bar: `hsl(${hue},65%,50%)`, headerBg:`hsl(${hue},78%,95%)`,
+  };
+}
+function applyChipColor(el, name){ const c=sectorColors(name); el.style.backgroundColor=c.bg; el.style.color=c.fg; }
+
+/* ─── user input persistence ─── */
+function loadUserInputs(){ try { return JSON.parse(localStorage.getItem(LS_USER) || '{}') || {}; } catch { return {}; } }
+function saveUserInputs(){
+  const obj = {};
+  for(const s of state.etfs){
+    const t = s.ticker; if(!t) continue;
+    const fields = {};
+    for(const f of USER_FIELDS){
+      const v = s[f];
+      if(v!==null && v!==undefined && v!=='' && v!==false) fields[f] = v;
+    }
+    if(Object.keys(fields).length) obj[t] = fields;
+  }
+  localStorage.setItem(LS_USER, JSON.stringify(obj));
+}
+let saveTimer = null;
+function queueSave(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>saveUserInputs(), 350);
+}
+
+/* ─── utils ─── */
+const fmt = (v, dec=0) => {
+  if(v===null||v===undefined||v===''||Number.isNaN(v)) return '';
+  const n = Number(v);
+  return Number.isFinite(n) ? n.toLocaleString('ko-KR',{minimumFractionDigits:dec,maximumFractionDigits:dec}) : '';
+};
+const parseNum = v => { if(v===null||v===undefined) return null; const s=String(v).replace(/,/g,'').trim(); if(s==='') return null; const n=Number(s); return Number.isFinite(n)?n:null; };
+
+function priceDecimals(s){
+  if(s.currency==='KRW') return 0;
+  const p = parseNum(s && s.price_native);
+  if(p===null) return 2;
+  return p >= 100 ? 2 : 2;
+}
+
+function sortValue(s, k){
+  switch(k){
+    case 'price_change_pct': return parseNum(s.price_change_pct);
+    case 'price_native': return parseNum(s.price_native);
+    case 'sector': return normSector(s.sector);
+    default: return s[k];
+  }
+}
+
+/* ─── fetch ─── */
+async function fetchFromGitHub(){
+  const url = `https://raw.githubusercontent.com/${GH.OWNER}/${GH.REPO}/${GH.BRANCH}/${GH.PATH}?t=${Date.now()}`;
+  const r = await fetch(url, { cache:'no-store' });
+  if(!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+
+/* ─── render ─── */
+function renderHeader(){
+  const tr = document.getElementById('header-row');
+  tr.innerHTML='';
+  COLS.forEach((c, ci) => {
+    const th = document.createElement('th');
+    if(ci <= 0){ th.classList.add('col-sticky'); th.dataset.stickyIdx = String(ci); }
+    if(ci === 0) th.classList.add('col-sticky-end');
+    th.textContent = c.label;
+    if(c.align==='left') th.classList.add('text-left');
+    if(c.align==='center') th.classList.add('text-center');
+    if(c.sortable){
+      th.addEventListener('click', () => {
+        if(state.sortKey===c.key) state.sortDir = state.sortDir==='asc' ? 'desc' : 'asc';
+        else { state.sortKey=c.key; state.sortDir='asc'; }
+        render();
+      });
+      if(state.sortKey===c.key) th.classList.add(state.sortDir==='asc'?'sorted-asc':'sorted-desc');
+    } else {
+      th.style.cursor = 'default';
+    }
+    tr.appendChild(th);
+  });
+}
+
+function renderRow(s){
+  const tr = document.createElement('tr');
+  tr.dataset.ticker = s.ticker;
+  COLS.forEach((c, ci) => {
+    const td = document.createElement('td');
+    if(ci <= 0){ td.classList.add('col-sticky'); td.dataset.stickyIdx = String(ci); }
+    if(ci === 0) td.classList.add('col-sticky-end');
+    if(c.align==='left') td.classList.add('text-left');
+    if(c.align==='center') td.classList.add('text-center');
+
+    if(c.type === 'ro-name'){
+      td.classList.add('readonly-cell', 'name');
+      const ticker = s.ticker || '';
+      const isKorean = ticker.endsWith('.KS') || ticker.endsWith('.KQ');
+      const tickerCode = ticker.split('.')[0];
+      const naverUrl = isKorean
+        ? `https://m.stock.naver.com/domestic/stock/${tickerCode}/total`
+        : `https://m.stock.naver.com/worldstock/etf/${ticker}.O/total`;
+
+      const wrap = document.createElement('div');
+      wrap.className = 'name-wrap';
+
+      const star = document.createElement('button');
+      star.className = 'star-btn' + (s.favorite ? ' active' : '');
+      star.textContent = '★';
+      star.title = s.favorite ? '즐겨찾기 해제' : '즐겨찾기 추가';
+      star.addEventListener('click', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        s.favorite = !s.favorite;
+        star.className = 'star-btn' + (s.favorite ? ' active' : '');
+        star.title = s.favorite ? '즐겨찾기 해제' : '즐겨찾기 추가';
+        queueSave();
+        if(state.favoriteOnly) render();
+      });
+      wrap.appendChild(star);
+
+      const a = document.createElement('a');
+      a.href = naverUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = s.name || '';
+      wrap.appendChild(a);
+      td.appendChild(wrap);
+    } else if(c.type === 'ro-text'){
+      td.classList.add('readonly-cell');
+      td.textContent = s[c.key] || '';
+    } else if(c.type === 'category'){
+      td.classList.add('cat-cell');
+      const cat = s.category || '';
+      const chip = document.createElement('span');
+      chip.className = 'cat-tag cat-' + cat.replace(/[\/\s]/g,'-');
+      chip.textContent = cat;
+      td.appendChild(chip);
+    } else if(c.type === 'sector'){
+      td.classList.add('sector-cell');
+      const cur = normSector(s.sector);
+      const chip = document.createElement('span');
+      chip.className = 'sector-tag';
+      chip.textContent = (cur === SECTOR_UNCATEGORIZED) ? '미분류' : cur;
+      applyChipColor(chip, cur);
+      td.appendChild(chip);
+    } else if(c.type === 'change-pct'){
+      const v = parseNum(s.price_change_pct);
+      if(v === null){ td.textContent='—'; td.classList.add('dim'); }
+      else {
+        td.textContent = (v >= 0 ? '+' : '') + fmt(v, 2) + '%';
+        td.classList.add(v > 0 ? 'down' : v < 0 ? 'up' : 'dim');
+      }
+    } else if(c.type === 'chart3y'){
+      td.classList.add('chart-cell');
+      td.innerHTML = renderSparkline(s.price_history_3y);
+    } else if(c.type === 'chart'){
+      td.classList.add('chart-cell');
+      td.innerHTML = renderSparkline(s.price_history);
+    } else if(c.type === 'current-price'){
+      td.classList.add('readonly-cell');
+      const v = parseNum(s.price_native);
+      const dec = priceDecimals(s);
+      td.textContent = v === null ? '—' : fmt(v, dec);
+      if(s.currency && s.currency !== 'KRW') td.title = `${s.currency} 기준`;
+    } else if(c.type === 'text'){
+      td.classList.add('memo-cell','text-left');
+      const wrap = document.createElement('div');
+      wrap.className = 'memo-wrap';
+
+      const ta = document.createElement('textarea');
+      ta.className = 'cell-text';
+      ta.placeholder = '메모...';
+      ta.value = s[c.key] || '';
+      ta.rows = 1;
+
+      const COLLAPSED_H = 30;
+      const autoResize = () => { ta.style.height='auto'; ta.style.height=ta.scrollHeight+'px'; };
+      const collapse = () => { ta.style.height = COLLAPSED_H + 'px'; ta.style.overflow='hidden'; };
+      collapse();
+
+      const btn = document.createElement('button');
+      btn.className = 'memo-toggle';
+      btn.title = '펼치기 / 접기';
+      btn.textContent = '▼';
+      let expanded = false;
+      const setExpanded = (val) => {
+        expanded = val;
+        if(expanded){ btn.textContent='▲'; btn.classList.add('expanded'); autoResize(); ta.style.overflow='hidden'; }
+        else { btn.textContent='▼'; btn.classList.remove('expanded'); if(document.activeElement !== ta) collapse(); }
+      };
+      btn.addEventListener('mousedown', (e) => { e.preventDefault(); setExpanded(!expanded); });
+
+      const updateBadge = (text) => {
+        const lines = (text || '').split('\n').filter(l => l.trim() !== '').length;
+        btn.classList.toggle('has-content', lines > 0);
+        const old = wrap.querySelector('.line-badge'); if(old) old.remove();
+        if(lines >= 2){
+          const badge = document.createElement('span');
+          badge.className = 'line-badge';
+          badge.textContent = lines + '줄';
+          wrap.insertBefore(badge, btn);
+        }
+      };
+
+      ta.addEventListener('focus', () => { ta.style.overflow='hidden'; autoResize(); });
+      ta.addEventListener('input', autoResize);
+      ta.addEventListener('blur', () => {
+        s[c.key] = ta.value.trim();
+        ta.value = s[c.key];
+        updateBadge(s[c.key]);
+        queueSave();
+        if(!expanded) collapse();
+      });
+      ta.addEventListener('keydown', e => {
+        if(e.key === 'Escape'){ ta.value = s[c.key] || ''; ta.blur(); }
+      });
+
+      wrap.appendChild(ta);
+      wrap.appendChild(btn);
+      updateBadge(s[c.key]);
+      td.appendChild(wrap);
+    }
+    tr.appendChild(td);
+  });
+  return tr;
+}
+
+function compareETFs(a, b, key, dirSign){
+  const av = sortValue(a, key), bv = sortValue(b, key);
+  const aN = av===null||av===undefined||av===''||Number.isNaN(av);
+  const bN = bv===null||bv===undefined||bv===''||Number.isNaN(bv);
+  if(aN && bN) return 0;
+  if(aN) return 1;
+  if(bN) return -1;
+  if(typeof av === 'number' && typeof bv === 'number') return (av - bv) * dirSign;
+  return String(av).localeCompare(String(bv), 'ko') * dirSign;
+}
+
+function buildGroupRow(sectorName, count){
+  const colors = sectorColors(sectorName);
+  const tr = document.createElement('tr');
+  tr.className = 'group-row';
+  const td = document.createElement('td');
+  td.colSpan = COLS.length;
+  td.className = 'text-left';
+  td.style.backgroundColor = colors.headerBg;
+  td.style.boxShadow = `inset 5px 0 0 ${colors.bar}`;
+  const span = document.createElement('span');
+  span.className = 'group-name';
+  span.style.color = colors.fg;
+  span.innerHTML = `<span class="group-dot" style="background:${colors.bar};opacity:1"></span>${sectorName === SECTOR_UNCATEGORIZED ? '미분류' : sectorName}`;
+  const meta = document.createElement('span');
+  meta.className = 'group-meta';
+  meta.textContent = `${count}개 ETF`;
+  td.appendChild(span); td.appendChild(meta);
+  tr.appendChild(td);
+  return tr;
+}
+
+function render(){
+  buildSectorHueMap();
+  renderHeader();
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  tbody.classList.remove('grouped');
+
+  let list = [...state.etfs];
+  if(state.favoriteOnly) list = list.filter(s => s.favorite);
+  if(state.filter){
+    const q = state.filter.toLowerCase();
+    list = list.filter(s =>
+      (s.name||'').toLowerCase().includes(q) ||
+      (s.ticker||'').toLowerCase().includes(q) ||
+      (s.description||'').toLowerCase().includes(q) ||
+      (s.memo||'').toLowerCase().includes(q));
+  }
+  if(state.catFilter) list = list.filter(s => s.category === state.catFilter);
+  if(state.sectorFilter) list = list.filter(s => normSector(s.sector) === state.sectorFilter);
+
+  const dirSign = state.sortDir === 'asc' ? 1 : -1;
+  if(state.sortKey) list.sort((a,b)=>compareETFs(a,b,state.sortKey,dirSign));
+
+  if(!list.length){
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = COLS.length;
+    td.className = 'empty';
+    td.textContent = (state.filter || state.catFilter || state.sectorFilter || state.favoriteOnly) ? '검색 결과 없음' : '데이터 없음';
+    tr.appendChild(td); tbody.appendChild(tr);
+  } else if(state.groupBySector){
+    tbody.classList.add('grouped');
+    const groups = new Map();
+    list.forEach(s => {
+      const sec = normSector(s.sector);
+      if(!groups.has(sec)) groups.set(sec, []);
+      groups.get(sec).push(s);
+    });
+    const entries = [...groups.entries()].map(([k, arr]) => ({ sector:k, items:arr }));
+    entries.sort((a,b) => {
+      if(a.sector === SECTOR_UNCATEGORIZED) return 1;
+      if(b.sector === SECTOR_UNCATEGORIZED) return -1;
+      return b.items.length - a.items.length;
+    });
+    entries.forEach(({sector, items}) => {
+      const innerKey = state.sortKey || 'price_change_pct';
+      const innerDir = state.sortKey ? dirSign : -1;
+      const sorted = [...items].sort((a,b)=>compareETFs(a,b,innerKey,innerDir));
+      tbody.appendChild(buildGroupRow(sector, items.length));
+      const barColor = sectorColors(sector).bar;
+      sorted.forEach(s => {
+        const row = renderRow(s);
+        if(row.firstChild) row.firstChild.style.boxShadow = `inset 3px 0 0 ${barColor}`;
+        tbody.appendChild(row);
+      });
+    });
+  } else {
+    list.forEach(s => tbody.appendChild(renderRow(s)));
+  }
+
+  updateCatFilterOptions();
+  updateSectorFilterOptions();
+  syncToggleButton();
+  syncFavButton();
+  requestAnimationFrame(applyStickyOffsets);
+
+  const m = document.getElementById('meta');
+  const parts = [];
+  if(state.updated_at){
+    const utc = new Date(state.updated_at + 'Z');
+    const kst = new Date(utc.getTime() + 9 * 3600 * 1000);
+    const kstStr = kst.toISOString().slice(0,16).replace('T',' ');
+    parts.push(`가격 ${kstStr} KST`);
+  }
+  parts.push(`${state.etfs.length}개 ETF`);
+  if(state.favoriteOnly) parts.push(`⭐ ${state.etfs.filter(s=>s.favorite).length}개`);
+  if(state.catFilter) parts.push(`분류: ${state.catFilter}`);
+  if(state.sectorFilter) parts.push(`섹터: ${state.sectorFilter}`);
+  m.textContent = parts.join(' · ');
+}
+
+function updateCatFilterOptions(){
+  const sel = document.getElementById('cat-filter');
+  const counts = new Map();
+  for(const s of state.etfs){
+    counts.set(s.category, (counts.get(s.category)||0)+1);
+  }
+  const prev = state.catFilter;
+  const sig = [...counts.entries()].map(([k,v])=>`${k}:${v}`).join('|');
+  if(sel.dataset.sig === sig){ sel.value = prev; return; }
+  sel.dataset.sig = sig;
+  sel.innerHTML = '';
+  const all = document.createElement('option');
+  all.value = ''; all.textContent = `전체 분류 (${state.etfs.length})`;
+  sel.appendChild(all);
+  CATS.forEach(c => {
+    if(!counts.has(c)) return;
+    const o = document.createElement('option');
+    o.value = c; o.textContent = `${c} (${counts.get(c)})`;
+    sel.appendChild(o);
+  });
+  sel.value = prev;
+}
+
+function updateSectorFilterOptions(){
+  const sel = document.getElementById('sector-filter');
+  const counts = new Map();
+  for(const s of state.etfs){
+    const k = normSector(s.sector);
+    counts.set(k, (counts.get(k)||0)+1);
+  }
+  const order = [...counts.keys()].sort((a,b)=>{
+    if(a===SECTOR_UNCATEGORIZED) return 1;
+    if(b===SECTOR_UNCATEGORIZED) return -1;
+    return counts.get(b)-counts.get(a);
+  });
+  const prev = state.sectorFilter;
+  const sig = order.map(k=>`${k}:${counts.get(k)}`).join('|');
+  if(sel.dataset.sig === sig){ sel.value = prev; return; }
+  sel.dataset.sig = sig;
+  sel.innerHTML = '';
+  const all = document.createElement('option');
+  all.value = ''; all.textContent = `전체 섹터 (${state.etfs.length})`;
+  sel.appendChild(all);
+  order.forEach(name => {
+    const o = document.createElement('option');
+    o.value = name; o.textContent = `${name} (${counts.get(name)})`;
+    sel.appendChild(o);
+  });
+  sel.value = prev;
+}
+
+function syncToggleButton(){
+  const btn = document.getElementById('group-toggle');
+  if(btn) btn.classList.toggle('toggle-on', !!state.groupBySector);
+}
+function syncFavButton(){
+  const btn = document.getElementById('fav-filter-btn');
+  if(btn) btn.classList.toggle('fav-on', !!state.favoriteOnly);
+}
+
+function applyStickyOffsets(){
+  // Only first column is sticky; offset = 0
+  document.querySelectorAll('#tbl th.col-sticky,#tbl td.col-sticky').forEach(el => {
+    if(el.dataset.stickyIdx === '0') el.style.left = '0px';
+  });
+}
+
+/* ─── toast ─── */
+let toastTimer = null;
+function toast(msg, kind=''){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show ' + (kind || '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{ el.classList.remove('show'); }, 2400);
+}
+
+/* ─── GitHub commit ─── */
+function getPat(){ return localStorage.getItem(LS_PAT) || ''; }
+function setPat(v){ if(v) localStorage.setItem(LS_PAT, v); else localStorage.removeItem(LS_PAT); }
+
+async function ghGetSha(){
+  const pat = getPat(); if(!pat) throw new Error('PAT 미설정');
+  const r = await fetch(`https://api.github.com/repos/${GH.OWNER}/${GH.REPO}/contents/${GH.PATH}?ref=${GH.BRANCH}`, {
+    headers: { 'Authorization': `token ${pat}`, 'Accept':'application/vnd.github+json' }
+  });
+  if(!r.ok) throw new Error(`SHA HTTP ${r.status}`);
+  const j = await r.json(); return j.sha;
+}
+
+async function commitToGithub(){
+  const pat = getPat();
+  if(!pat){ openPatModal(); return; }
+  const btn = document.getElementById('gh-commit-btn');
+  btn.disabled = true; const origText = btn.textContent; btn.textContent = '☁️ 커밋 중...';
+  try {
+    const sha = await ghGetSha();
+    // Merge current memo/favorite into payload
+    const payload = {
+      updated_at: state.updated_at,
+      etfs: state.etfs.map(e => ({
+        name: e.name, ticker: e.ticker, category: e.category, description: e.description, sector: e.sector,
+        currency: e.currency, price_native: e.price_native, price_change_pct: e.price_change_pct,
+        price_history: e.price_history, price_history_3y: e.price_history_3y,
+        favorite: !!e.favorite, memo: e.memo || '',
+      })),
+    };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+    const r = await fetch(`https://api.github.com/repos/${GH.OWNER}/${GH.REPO}/contents/${GH.PATH}`, {
+      method:'PUT',
+      headers: { 'Authorization': `token ${pat}`, 'Accept':'application/vnd.github+json' },
+      body: JSON.stringify({
+        message: `update memos/favorites (${new Date().toISOString()})`,
+        content, sha, branch: GH.BRANCH,
+      })
+    });
+    if(!r.ok){ const t = await r.text(); throw new Error(`PUT HTTP ${r.status} ${t.slice(0,100)}`); }
+    toast('✓ GitHub에 커밋 완료', 'ok');
+  } catch(e){
+    toast('커밋 실패: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false; btn.textContent = origText;
+  }
+}
+
+/* PAT modal */
+function openPatModal(){
+  document.getElementById('pat-input').value = getPat();
+  document.getElementById('pat-modal').classList.add('show');
+}
+function closePatModal(){ document.getElementById('pat-modal').classList.remove('show'); }
+
+/* ─── init ─── */
+async function init(){
+  // restore UI
+  const ui = loadUi();
+  state.catFilter = ui.catFilter || '';
+  state.sectorFilter = ui.sectorFilter || '';
+  state.groupBySector = !!ui.groupBySector;
+  state.favoriteOnly = !!ui.favoriteOnly;
+
+  // fetch JSON
+  let data = null;
+  try { data = await fetchFromGitHub(); }
+  catch(e){
+    // local fallback
+    try { const r = await fetch('etfs.json?t=' + Date.now()); data = await r.json(); }
+    catch{}
+  }
+  if(!data || !data.etfs){ document.getElementById('meta').textContent = '데이터 로드 실패'; return; }
+
+  state.etfs = data.etfs.map(e => ({...e}));
+  state.updated_at = data.updated_at || '';
+
+  // overlay user inputs
+  const user = loadUserInputs();
+  for(const s of state.etfs){
+    const u = user[s.ticker];
+    if(!u) continue;
+    if(u.memo) s.memo = u.memo;
+    if(u.favorite) s.favorite = true;
+  }
+
+  render();
+
+  // events
+  document.getElementById('filter').addEventListener('input', e => { state.filter = e.target.value; render(); });
+  document.getElementById('cat-filter').addEventListener('change', e => { state.catFilter = e.target.value; saveUi(); render(); });
+  document.getElementById('sector-filter').addEventListener('change', e => { state.sectorFilter = e.target.value; saveUi(); render(); });
+  document.getElementById('group-toggle').addEventListener('click', () => { state.groupBySector = !state.groupBySector; saveUi(); render(); });
+  document.getElementById('fav-filter-btn').addEventListener('click', () => { state.favoriteOnly = !state.favoriteOnly; saveUi(); render(); });
+
+  document.getElementById('gh-commit-btn').addEventListener('click', commitToGithub);
+  document.getElementById('gh-settings-btn').addEventListener('click', openPatModal);
+  document.getElementById('pat-close').addEventListener('click', closePatModal);
+  document.getElementById('pat-modal').addEventListener('click', e => { if(e.target.id==='pat-modal') closePatModal(); });
+  document.getElementById('pat-save').addEventListener('click', () => {
+    const v = document.getElementById('pat-input').value.trim();
+    setPat(v); closePatModal();
+    toast(v ? '✓ PAT 저장됨' : 'PAT 삭제됨', v ? 'ok' : '');
+  });
+  document.getElementById('pat-clear').addEventListener('click', () => {
+    setPat(''); document.getElementById('pat-input').value='';
+    toast('PAT 삭제됨', '');
+  });
+}
+
+init();
+</script>
+</body>
+</html>
