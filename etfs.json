@@ -33663,5 +33663,988 @@
       "naver_code": "0105E0",
       "naver_path": "domestic/stock"
     }
-  ]
+  ],
+  "insights": {
+    "computed_at": "2026-05-24T06:13:49",
+    "overview": [
+      {
+        "label": "1주",
+        "avg": 1.328,
+        "breadth": 70.1,
+        "n": 117
+      },
+      {
+        "label": "1개월",
+        "avg": 3.879,
+        "breadth": 52.1,
+        "n": 117
+      },
+      {
+        "label": "3개월",
+        "avg": 6.291,
+        "breadth": 53.8,
+        "n": 117
+      },
+      {
+        "label": "1년",
+        "avg": 74.216,
+        "breadth": 90.6,
+        "n": 117
+      }
+    ],
+    "sector_rank": [
+      {
+        "sector": "전력/인프라",
+        "n": 2,
+        "week": 5.288,
+        "month": 42.273,
+        "quarter": 65.506,
+        "year": 360.169
+      },
+      {
+        "sector": "반도체",
+        "n": 3,
+        "week": 4.811,
+        "month": 22.532,
+        "quarter": 51.356,
+        "year": 280.422
+      },
+      {
+        "sector": "방산/우주",
+        "n": 4,
+        "week": 4.379,
+        "month": -3.847,
+        "quarter": 4.305,
+        "year": 86.921
+      },
+      {
+        "sector": "IT/기술",
+        "n": 6,
+        "week": 3.499,
+        "month": 19.674,
+        "quarter": 33.354,
+        "year": 106.44
+      },
+      {
+        "sector": "유럽",
+        "n": 3,
+        "week": 3.115,
+        "month": 0.972,
+        "quarter": -2.937,
+        "year": 12.688
+      },
+      {
+        "sector": "건설/부동산",
+        "n": 2,
+        "week": 2.942,
+        "month": -9.518,
+        "quarter": 8.953,
+        "year": 67.663
+      },
+      {
+        "sector": "한국 대표",
+        "n": 9,
+        "week": 2.91,
+        "month": 14.868,
+        "quarter": 23.529,
+        "year": 172.293
+      },
+      {
+        "sector": "금융",
+        "n": 8,
+        "week": 2.909,
+        "month": 1.799,
+        "quarter": 0.399,
+        "year": 65.364
+      },
+      {
+        "sector": "신재생에너지",
+        "n": 4,
+        "week": 2.796,
+        "month": 11.962,
+        "quarter": 21.346,
+        "year": 125.62
+      },
+      {
+        "sector": "바이오/제약",
+        "n": 6,
+        "week": 1.893,
+        "month": -2.552,
+        "quarter": -6.772,
+        "year": 37.556
+      },
+      {
+        "sector": "부동산/리츠",
+        "n": 4,
+        "week": 1.839,
+        "month": -1.334,
+        "quarter": 5.475,
+        "year": 29.155
+      },
+      {
+        "sector": "헬스케어",
+        "n": 4,
+        "week": 1.643,
+        "month": 1.237,
+        "quarter": -4.057,
+        "year": 17.166
+      },
+      {
+        "sector": "아시아",
+        "n": 4,
+        "week": 1.394,
+        "month": 3.771,
+        "quarter": 3.99,
+        "year": 28.186
+      },
+      {
+        "sector": "미국",
+        "n": 2,
+        "week": 1.299,
+        "month": 3.2,
+        "quarter": 6.729,
+        "year": 27.425
+      },
+      {
+        "sector": "신흥국",
+        "n": 2,
+        "week": 1.159,
+        "month": -1.639,
+        "quarter": -1.24,
+        "year": 34.596
+      },
+      {
+        "sector": "2차전지",
+        "n": 2,
+        "week": 1.098,
+        "month": -1.565,
+        "quarter": 13.846,
+        "year": 123.332
+      },
+      {
+        "sector": "산업재",
+        "n": 4,
+        "week": 1.064,
+        "month": 1.894,
+        "quarter": 3.928,
+        "year": 74.226
+      },
+      {
+        "sector": "운송",
+        "n": 2,
+        "week": 1.042,
+        "month": -0.402,
+        "quarter": -1.962,
+        "year": 26.762
+      },
+      {
+        "sector": "인프라",
+        "n": 2,
+        "week": 0.598,
+        "month": -1.214,
+        "quarter": -0.859,
+        "year": 26.58
+      },
+      {
+        "sector": "원자력",
+        "n": 3,
+        "week": 0.589,
+        "month": -2.635,
+        "quarter": 4.916,
+        "year": 121.081
+      },
+      {
+        "sector": "에너지",
+        "n": 4,
+        "week": -0.201,
+        "month": 1.664,
+        "quarter": 9.703,
+        "year": 73.782
+      },
+      {
+        "sector": "게임/엔터",
+        "n": 2,
+        "week": -0.255,
+        "month": -3.25,
+        "quarter": -4.404,
+        "year": -5.595
+      },
+      {
+        "sector": "금융/배당",
+        "n": 3,
+        "week": -0.296,
+        "month": -1.421,
+        "quarter": -7.195,
+        "year": 64.985
+      },
+      {
+        "sector": "AI/로봇",
+        "n": 2,
+        "week": -0.593,
+        "month": 15.184,
+        "quarter": 10.702,
+        "year": 112.654
+      },
+      {
+        "sector": "필수소비재",
+        "n": 4,
+        "week": -0.617,
+        "month": -1.983,
+        "quarter": -6.218,
+        "year": 10.931
+      },
+      {
+        "sector": "소재/광업",
+        "n": 5,
+        "week": -0.762,
+        "month": -2.125,
+        "quarter": -6.119,
+        "year": 76.928
+      },
+      {
+        "sector": "임의소비재",
+        "n": 7,
+        "week": -0.804,
+        "month": 2.074,
+        "quarter": -0.266,
+        "year": 17.161
+      },
+      {
+        "sector": "통신",
+        "n": 2,
+        "week": -1.558,
+        "month": -2.627,
+        "quarter": -4.81,
+        "year": 6.685
+      },
+      {
+        "sector": "원자재",
+        "n": 2,
+        "week": -2.214,
+        "month": 1.982,
+        "quarter": -10.985,
+        "year": 44.751
+      },
+      {
+        "sector": "자동차",
+        "n": 2,
+        "week": -2.651,
+        "month": 14.138,
+        "quarter": 15.296,
+        "year": 147.949
+      },
+      {
+        "sector": "엔터/콘텐츠",
+        "n": 3,
+        "week": -3.995,
+        "month": -8.611,
+        "quarter": -26.384,
+        "year": -22.323
+      }
+    ],
+    "top_week": [
+      {
+        "name": "SAMSUNG KODEX AI Semiconductor TOP2 Plus ETF",
+        "ticker": "395160.KS",
+        "sector": "반도체",
+        "naver_code": "395160",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 11.821,
+          "month": 37.864,
+          "quarter": 68.51,
+          "year": 416.162
+        }
+      },
+      {
+        "name": "Samsung KODEX Samsung Group ETF",
+        "ticker": "102780.KS",
+        "sector": "한국 대표",
+        "naver_code": "102780",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 9.671,
+          "month": 27.248,
+          "quarter": 46.994,
+          "year": 245.453
+        }
+      },
+      {
+        "name": "Global X Cybersecurity ETF",
+        "ticker": "BUG",
+        "sector": "IT/기술",
+        "naver_code": "BUG.O",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 8.462,
+          "month": 31.157,
+          "quarter": 41.358,
+          "year": -1.17
+        }
+      },
+      {
+        "name": "Samsung KODEX Insurance ETF",
+        "ticker": "140700.KS",
+        "sector": "금융",
+        "naver_code": "140700",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 7.971,
+          "month": 18.723,
+          "quarter": 9.767,
+          "year": 109.572
+        }
+      },
+      {
+        "name": "Mirae Asset Tiger IT ETF",
+        "ticker": "139260.KS",
+        "sector": "IT/기술",
+        "naver_code": "139260",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 7.102,
+          "month": 45.692,
+          "quarter": 86.877,
+          "year": 511.637
+        }
+      },
+      {
+        "name": "iShares MSCI Taiwan ETF",
+        "ticker": "EWT",
+        "sector": "아시아",
+        "naver_code": "EWT",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 6.091,
+          "month": 14.957,
+          "quarter": 32.331,
+          "year": 89.254
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX AI Electric Power Core Facilities ETF",
+        "ticker": "487240.KS",
+        "sector": "전력/인프라",
+        "naver_code": "487240",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 5.304,
+          "month": 42.668,
+          "quarter": 66.166,
+          "year": 364.678
+        }
+      }
+    ],
+    "bot_week": [
+      {
+        "name": "MIRAE ASSET TIGER MEDIA CONTENTS ETF",
+        "ticker": "228810.KS",
+        "sector": "엔터/콘텐츠",
+        "naver_code": "228810",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -7.378,
+          "month": -14.557,
+          "quarter": -32.325,
+          "year": -39.494
+        }
+      },
+      {
+        "name": "MIRAE ASSET TIGER COSMETICS ETF",
+        "ticker": "228790.KS",
+        "sector": "임의소비재",
+        "naver_code": "228790",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -3.646,
+          "month": -4.298,
+          "quarter": -0.054,
+          "year": 4.4
+        }
+      },
+      {
+        "name": "MIRAE ASSET TIGER TOUR LEISURE ETF",
+        "ticker": "228800.KS",
+        "sector": "임의소비재",
+        "naver_code": "228800",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -3.517,
+          "month": -4.154,
+          "quarter": -15.438,
+          "year": -0.422
+        }
+      },
+      {
+        "name": "NH-Amundi HANARO K-Food ETF",
+        "ticker": "438900.KS",
+        "sector": "필수소비재",
+        "naver_code": "438900",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -3.487,
+          "month": -2.453,
+          "quarter": -6.662,
+          "year": 3.55
+        }
+      },
+      {
+        "name": "United States Natural Gas Fund",
+        "ticker": "UNG",
+        "sector": "원자재",
+        "naver_code": "UNG",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": -3.442,
+          "month": 3.992,
+          "quarter": -6.814,
+          "year": -34.997
+        }
+      },
+      {
+        "name": "Mirae Asset Tiger Hyundai Motor Group ETF",
+        "ticker": "138540.KS",
+        "sector": "자동차",
+        "naver_code": "138540",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -3.331,
+          "month": 12.782,
+          "quarter": 15.902,
+          "year": 161.977
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX Consumer Discretionary ETF",
+        "ticker": "266390.KS",
+        "sector": "임의소비재",
+        "naver_code": "266390",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -2.978,
+          "month": 27.817,
+          "quarter": 18.329,
+          "year": 65.963
+        }
+      }
+    ],
+    "top_year": [
+      {
+        "name": "Mirae Asset Tiger IT ETF",
+        "ticker": "139260.KS",
+        "sector": "IT/기술",
+        "naver_code": "139260",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 7.102,
+          "month": 45.692,
+          "quarter": 86.877,
+          "year": 511.637
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX AI Semiconductor TOP2 Plus ETF",
+        "ticker": "395160.KS",
+        "sector": "반도체",
+        "naver_code": "395160",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 11.821,
+          "month": 37.864,
+          "quarter": 68.51,
+          "year": 416.162
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX AI Electric Power Core Facilities ETF",
+        "ticker": "487240.KS",
+        "sector": "전력/인프라",
+        "naver_code": "487240",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 5.304,
+          "month": 42.668,
+          "quarter": 66.166,
+          "year": 364.678
+        }
+      },
+      {
+        "name": "NH-Amundi HANARO Electric Power Capex ETF",
+        "ticker": "491820.KS",
+        "sector": "전력/인프라",
+        "naver_code": "491820",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 5.272,
+          "month": 41.877,
+          "quarter": 64.846,
+          "year": 355.661
+        }
+      },
+      {
+        "name": "Mirae Asset TIGER Korea TOP10 ETF",
+        "ticker": "292150.KS",
+        "sector": "한국 대표",
+        "naver_code": "292150",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 3.174,
+          "month": 26.23,
+          "quarter": 37.912,
+          "year": 312.697
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX AI Semiconductor Core Equipment ETF",
+        "ticker": "471990.KS",
+        "sector": "반도체",
+        "naver_code": "471990",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -0.979,
+          "month": 10.125,
+          "quarter": 45.974,
+          "year": 281.625
+        }
+      },
+      {
+        "name": "Samsung KODEX 200 ETF",
+        "ticker": "069500.KS",
+        "sector": "한국 대표",
+        "naver_code": "069500",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 5.247,
+          "month": 27.836,
+          "quarter": 42.511,
+          "year": 260.374
+        }
+      }
+    ],
+    "bot_year": [
+      {
+        "name": "MIRAE ASSET TIGER MEDIA CONTENTS ETF",
+        "ticker": "228810.KS",
+        "sector": "엔터/콘텐츠",
+        "naver_code": "228810",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -7.378,
+          "month": -14.557,
+          "quarter": -32.325,
+          "year": -39.494
+        }
+      },
+      {
+        "name": "United States Natural Gas Fund",
+        "ticker": "UNG",
+        "sector": "원자재",
+        "naver_code": "UNG",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": -3.442,
+          "month": 3.992,
+          "quarter": -6.814,
+          "year": -34.997
+        }
+      },
+      {
+        "name": "KIM ACE KPOP Focus ETF",
+        "ticker": "475050.KS",
+        "sector": "엔터/콘텐츠",
+        "naver_code": "475050",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -2.612,
+          "month": -5.452,
+          "quarter": -27.665,
+          "year": -24.89
+        }
+      },
+      {
+        "name": "iShares MSCI India ETF",
+        "ticker": "INDA",
+        "sector": "아시아",
+        "naver_code": "INDA.K",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 0.834,
+          "month": -2.064,
+          "quarter": -8.021,
+          "year": -11.341
+        }
+      },
+      {
+        "name": "Global X Video Games & Esports ETF",
+        "ticker": "HERO",
+        "sector": "게임/엔터",
+        "naver_code": "HERO.O",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": -1.124,
+          "month": -3.807,
+          "quarter": -5.969,
+          "year": -10.262
+        }
+      },
+      {
+        "name": "iShares Expanded Tech-Software Sector ETF",
+        "ticker": "IGV",
+        "sector": "IT/기술",
+        "naver_code": "IGV",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 2.43,
+          "month": 12.493,
+          "quarter": 22.186,
+          "year": -7.77
+        }
+      },
+      {
+        "name": "Global X Social Media ETF",
+        "ticker": "SOCL",
+        "sector": "통신",
+        "naver_code": "SOCL.O",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": -2.582,
+          "month": -3.609,
+          "quarter": -10.026,
+          "year": -3.301
+        }
+      }
+    ],
+    "structural": [
+      {
+        "name": "Mirae Asset Tiger IT ETF",
+        "ticker": "139260.KS",
+        "sector": "IT/기술",
+        "naver_code": "139260",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 7.102,
+          "month": 45.692,
+          "quarter": 86.877,
+          "year": 511.637
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX AI Semiconductor TOP2 Plus ETF",
+        "ticker": "395160.KS",
+        "sector": "반도체",
+        "naver_code": "395160",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 11.821,
+          "month": 37.864,
+          "quarter": 68.51,
+          "year": 416.162
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX AI Electric Power Core Facilities ETF",
+        "ticker": "487240.KS",
+        "sector": "전력/인프라",
+        "naver_code": "487240",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 5.304,
+          "month": 42.668,
+          "quarter": 66.166,
+          "year": 364.678
+        }
+      },
+      {
+        "name": "NH-Amundi HANARO Electric Power Capex ETF",
+        "ticker": "491820.KS",
+        "sector": "전력/인프라",
+        "naver_code": "491820",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 5.272,
+          "month": 41.877,
+          "quarter": 64.846,
+          "year": 355.661
+        }
+      },
+      {
+        "name": "Mirae Asset TIGER Korea TOP10 ETF",
+        "ticker": "292150.KS",
+        "sector": "한국 대표",
+        "naver_code": "292150",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 3.174,
+          "month": 26.23,
+          "quarter": 37.912,
+          "year": 312.697
+        }
+      },
+      {
+        "name": "Samsung KODEX 200 ETF",
+        "ticker": "069500.KS",
+        "sector": "한국 대표",
+        "naver_code": "069500",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 5.247,
+          "month": 27.836,
+          "quarter": 42.511,
+          "year": 260.374
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX KOREA Value-up ETF",
+        "ticker": "495850.KS",
+        "sector": "한국 대표",
+        "naver_code": "495850",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 3.689,
+          "month": 27.937,
+          "quarter": 43.051,
+          "year": 259.287
+        }
+      },
+      {
+        "name": "Samsung KODEX Samsung Group ETF",
+        "ticker": "102780.KS",
+        "sector": "한국 대표",
+        "naver_code": "102780",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 9.671,
+          "month": 27.248,
+          "quarter": 46.994,
+          "year": 245.453
+        }
+      }
+    ],
+    "weakness": [
+      {
+        "name": "MIRAE ASSET TIGER MEDIA CONTENTS ETF",
+        "ticker": "228810.KS",
+        "sector": "엔터/콘텐츠",
+        "naver_code": "228810",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -7.378,
+          "month": -14.557,
+          "quarter": -32.325,
+          "year": -39.494
+        }
+      },
+      {
+        "name": "KIM ACE KPOP Focus ETF",
+        "ticker": "475050.KS",
+        "sector": "엔터/콘텐츠",
+        "naver_code": "475050",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -2.612,
+          "month": -5.452,
+          "quarter": -27.665,
+          "year": -24.89
+        }
+      },
+      {
+        "name": "SAMSUNG KODEX K-Content ETF",
+        "ticker": "266360.KS",
+        "sector": "엔터/콘텐츠",
+        "naver_code": "266360",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -1.995,
+          "month": -5.825,
+          "quarter": -19.163,
+          "year": -2.586
+        }
+      },
+      {
+        "name": "Global X Video Games & Esports ETF",
+        "ticker": "HERO",
+        "sector": "게임/엔터",
+        "naver_code": "HERO.O",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": -1.124,
+          "month": -3.807,
+          "quarter": -5.969,
+          "year": -10.262
+        }
+      },
+      {
+        "name": "MIRAE ASSET TIGER TOUR LEISURE ETF",
+        "ticker": "228800.KS",
+        "sector": "임의소비재",
+        "naver_code": "228800",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -3.517,
+          "month": -4.154,
+          "quarter": -15.438,
+          "year": -0.422
+        }
+      },
+      {
+        "name": "Global X Social Media ETF",
+        "ticker": "SOCL",
+        "sector": "통신",
+        "naver_code": "SOCL.O",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": -2.582,
+          "month": -3.609,
+          "quarter": -10.026,
+          "year": -3.301
+        }
+      }
+    ],
+    "accel": [
+      {
+        "name": "Global X Cybersecurity ETF",
+        "ticker": "BUG",
+        "sector": "IT/기술",
+        "naver_code": "BUG.O",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 8.462,
+          "month": 31.157,
+          "quarter": 41.358,
+          "year": -1.17
+        }
+      },
+      {
+        "name": "Samsung KODEX Insurance ETF",
+        "ticker": "140700.KS",
+        "sector": "금융",
+        "naver_code": "140700",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 7.971,
+          "month": 18.723,
+          "quarter": 9.767,
+          "year": 109.572
+        }
+      },
+      {
+        "name": "iShares U.S. Home Construction ETF",
+        "ticker": "ITB",
+        "sector": "건설/부동산",
+        "naver_code": "ITB",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 5.228,
+          "month": -9.779,
+          "quarter": -16.832,
+          "year": 2.596
+        }
+      },
+      {
+        "name": "Samsung KODEX Samsung Group ETF",
+        "ticker": "102780.KS",
+        "sector": "한국 대표",
+        "naver_code": "102780",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": 9.671,
+          "month": 27.248,
+          "quarter": 46.994,
+          "year": 245.453
+        }
+      },
+      {
+        "name": "iShares MSCI Taiwan ETF",
+        "ticker": "EWT",
+        "sector": "아시아",
+        "naver_code": "EWT",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 6.091,
+          "month": 14.957,
+          "quarter": 32.331,
+          "year": 89.254
+        }
+      },
+      {
+        "name": "SPDR S&P Retail ETF",
+        "ticker": "XRT",
+        "sector": "임의소비재",
+        "naver_code": "XRT",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 4.362,
+          "month": -3.912,
+          "quarter": -4.662,
+          "year": 11.47
+        }
+      }
+    ],
+    "reversal": [
+      {
+        "name": "Global X Uranium ETF",
+        "ticker": "URA",
+        "sector": "원자력",
+        "naver_code": "URA",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": -1.943,
+          "month": -13.299,
+          "quarter": -8.383,
+          "year": 61.16
+        }
+      },
+      {
+        "name": "VanEck Gold Miners ETF",
+        "ticker": "GDX",
+        "sector": "소재/광업",
+        "naver_code": "GDX",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": -2.667,
+          "month": -7.777,
+          "quarter": -22.912,
+          "year": 69.478
+        }
+      },
+      {
+        "name": "KIM ACE Next level Value Active ETF",
+        "ticker": "447430.KS",
+        "sector": "한국 대표",
+        "naver_code": "447430",
+        "naver_path": "domestic/stock",
+        "r": {
+          "week": -1.162,
+          "month": -2.997,
+          "quarter": 1.658,
+          "year": 27.265
+        }
+      }
+    ],
+    "rebound": [
+      {
+        "name": "iShares Expanded Tech-Software Sector ETF",
+        "ticker": "IGV",
+        "sector": "IT/기술",
+        "naver_code": "IGV",
+        "naver_path": "worldstock/etf",
+        "r": {
+          "week": 2.43,
+          "month": 12.493,
+          "quarter": 22.186,
+          "year": -7.77
+        }
+      }
+    ],
+    "verdict": [
+      "주간 평균 +1.33% · 상승 비중 70% — 강세 우위",
+      "자금 유입 강세: <b>전력/인프라</b> (+5.29%), <b>반도체</b> (+4.81%), <b>방산/우주</b> (+4.38%)",
+      "자금 이탈 우세: <b>엔터/콘텐츠</b> (-4.00%), <b>자동차</b> (-2.65%), <b>원자재</b> (-2.21%)",
+      "<b>구조적 강세 8종목</b>(1주·1개월·3개월·1년 모두 +): 중장기 보유 후보.",
+      "<b>구조적 약세 6종목</b>(전 기간 −): 신규 진입 신중.",
+      "<b>모멘텀 가속 6종목</b>: 최근 1주 상승 속도가 연간 추세보다 큼 — 추격 매수 후보, 과열 주의.",
+      "<b>조정 진입 3종목</b>: 장기 강세였으나 단기 하락 — 차익 실현 진행 중 가능성.",
+      "<b>저점 반등 시도 1종목</b>: 1년 약세였으나 1주 강한 상승 — 추세 전환 확인 필요."
+    ]
+  }
 }
