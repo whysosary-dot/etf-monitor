@@ -367,8 +367,9 @@
   }
   .insights-body .sum-card .lbl { font-size: 12px; color: var(--text-dim); margin-bottom: 3px; }
   .insights-body .sum-card .val { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .insights-body .sum-card .val.up { color: var(--blue); }
-  .insights-body .sum-card .val.dn { color: var(--red); }
+  /* Korean 관행: + 빨강, − 파랑 */
+  .insights-body .sum-card .val.pos { color: var(--red); }
+  .insights-body .sum-card .val.neg { color: var(--blue); }
   .insights-body .row-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
   }
@@ -384,8 +385,9 @@
   .insights-body table.ins-tbl th { background: var(--header); color: #4a5568; font-weight: 600; font-size: 12.5px; }
   .insights-body table.ins-tbl td.l, .insights-body table.ins-tbl th.l { text-align: left; }
   .insights-body table.ins-tbl tr:last-child td { border-bottom: none; }
-  .insights-body table.ins-tbl td.up { color: var(--blue); font-weight: 600; }
-  .insights-body table.ins-tbl td.dn { color: var(--red); font-weight: 600; }
+  /* Korean 관행: + 빨강, − 파랑 */
+  .insights-body table.ins-tbl td.pos { color: var(--red); font-weight: 600; }
+  .insights-body table.ins-tbl td.neg { color: var(--blue); font-weight: 600; }
   .insights-body table.ins-tbl td.name-c {
     max-width: 180px; overflow: hidden; text-overflow: ellipsis;
     word-break: keep-all; white-space: normal;
@@ -1069,9 +1071,10 @@ async function commitToGithub(){
   btn.disabled = true; const origText = btn.textContent; btn.textContent = '☁️ 커밋 중...';
   try {
     const sha = await ghGetSha();
-    // Merge current memo/favorite into payload
+    // Merge current memo/favorite into payload (preserve cron-baked insights)
     const payload = {
       updated_at: state.updated_at,
+      ...(state.insights ? { insights: state.insights } : {}),
       etfs: state.etfs.map(e => ({
         name: e.name, ticker: e.ticker, category: e.category, description: e.description, sector: e.sector,
         currency: e.currency, price_native: e.price_native, price_change_pct: e.price_change_pct,
@@ -1107,7 +1110,7 @@ function openPatModal(){
 function closePatModal(){ document.getElementById('pat-modal').classList.remove('show'); }
 
 /* ───────────── 인사이트 (돈의 흐름 분석) ───────────── */
-function pctCls(v){ return v == null ? 'dim' : v > 0 ? 'up' : v < 0 ? 'dn' : 'dim'; }
+function pctCls(v){ return v == null ? 'dim' : v > 0 ? 'pos' : v < 0 ? 'neg' : 'dim'; }
 function pctFmt(v){ if(v == null) return '—'; return (v >= 0 ? '+' : '') + fmt(v, 2) + '%'; }
 function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
@@ -1258,18 +1261,42 @@ function rowHtml(d, key){
   </tr>`;
 }
 
+// Convert precomputed (scheduled-task) insights to the same shape buildInsights returns
+function inflatePrecomputed(pre){
+  const re = (d) => ({...d, r: d.r || {week:null,month:null,quarter:null,year:null}});
+  return {
+    overview: pre.overview || [],
+    tops: {
+      week: { label: '1주',  top: (pre.top_week || []).map(re), bot: (pre.bot_week || []).map(re) },
+      year: { label: '1년',  top: (pre.top_year || []).map(re), bot: (pre.bot_year || []).map(re) },
+    },
+    sectorRank: pre.sector_rank || [],
+    structural: (pre.structural || []).map(re),
+    weakness:   (pre.weakness   || []).map(re),
+    accel:      (pre.accel      || []).map(re),
+    reversal:   (pre.reversal   || []).map(re),
+    rebound:    (pre.rebound    || []).map(re),
+    mood: (pre.verdict && pre.verdict[0]) ? (pre.verdict[0].includes('강세') ? '강세 우위' : pre.verdict[0].includes('약세') ? '약세 우위' : '중립/혼조') : '중립/혼조',
+    moodCls: (pre.verdict && pre.verdict[0]) ? (pre.verdict[0].includes('강세') ? 'b-bull' : pre.verdict[0].includes('약세') ? 'b-bear' : 'b-neutral') : 'b-neutral',
+    flowComment: pre.verdict || [],
+    _precomputed: true,
+    _computedAt: pre.computed_at || '',
+  };
+}
+
 function renderInsights(){
   const body = document.getElementById('insights-body');
   if(!state.etfs.length){ body.innerHTML = '<p class="dim">데이터 없음</p>'; return; }
 
-  const I = buildInsights(state.etfs);
+  // Prefer precomputed insights from scheduled task; else compute client-side
+  const I = state.insights ? inflatePrecomputed(state.insights) : buildInsights(state.etfs);
 
   const overviewHtml = `
     <div class="summary-grid">
       ${I.overview.map(o => `
         <div class="sum-card">
           <div class="lbl">${o.label} 평균 · 상승 종목</div>
-          <div class="val ${o.avg==null?'':o.avg>=0?'up':'dn'}">${pctFmt(o.avg)}
+          <div class="val ${o.avg==null?'':o.avg>=0?'pos':'neg'}">${pctFmt(o.avg)}
             <span style="font-size:12px;font-weight:500;color:var(--text-dim);margin-left:6px">${o.breadth==null?'':o.breadth.toFixed(0)+'%'}</span>
           </div>
         </div>
@@ -1443,6 +1470,7 @@ async function init(){
 
   state.etfs = data.etfs.map(e => ({...e}));
   state.updated_at = data.updated_at || '';
+  state.insights = data.insights || null;  // precomputed by weekly cron
 
   // overlay user inputs
   const user = loadUserInputs();
