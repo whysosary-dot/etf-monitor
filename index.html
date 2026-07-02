@@ -1052,7 +1052,7 @@ function toast(msg, kind=''){
 }
 
 /* ─── GitHub commit ─── */
-function getPat(){ return localStorage.getItem(LS_PAT) || ''; }
+function getPat(){ return localStorage.getItem(LS_PAT) || localStorage.getItem('sv_github_pat') || ''; }
 function setPat(v){ if(v) localStorage.setItem(LS_PAT, v); else localStorage.removeItem(LS_PAT); }
 
 async function ghGetSha(){
@@ -1064,36 +1064,43 @@ async function ghGetSha(){
   const j = await r.json(); return j.sha;
 }
 
+async function commitToGithubCore(){
+  const pat = getPat();
+  if(!pat) throw new Error('PAT 미설정');
+  if(!state || !state.etfs || !state.etfs.length) throw new Error('데이터 로딩 전');
+  const sha = await ghGetSha();
+  // Merge current memo/favorite into payload (preserve cron-baked insights)
+  const payload = {
+    updated_at: state.updated_at,
+    ...(state.insights ? { insights: state.insights } : {}),
+    etfs: state.etfs.map(e => ({
+      name: e.name, ticker: e.ticker, category: e.category, description: e.description, sector: e.sector,
+      currency: e.currency, price_native: e.price_native, price_change_pct: e.price_change_pct,
+      price_history: e.price_history, price_history_3y: e.price_history_3y,
+      price_history_3m: e.price_history_3m || [],
+      naver_code: e.naver_code, naver_path: e.naver_path,
+      favorite: !!e.favorite, memo: e.memo || '',
+    })),
+  };
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+  const r = await fetch(`https://api.github.com/repos/${GH.OWNER}/${GH.REPO}/contents/${GH.PATH}`, {
+    method:'PUT',
+    headers: { 'Authorization': `token ${pat}`, 'Accept':'application/vnd.github+json' },
+    body: JSON.stringify({
+      message: `update memos/favorites (${new Date().toISOString()})`,
+      content, sha, branch: GH.BRANCH,
+    })
+  });
+  if(!r.ok){ const t = await r.text(); throw new Error(`PUT HTTP ${r.status} ${t.slice(0,100)}`); }
+}
+
 async function commitToGithub(){
   const pat = getPat();
   if(!pat){ openPatModal(); return; }
   const btn = document.getElementById('gh-commit-btn');
   btn.disabled = true; const origText = btn.textContent; btn.textContent = '☁️ 커밋 중...';
   try {
-    const sha = await ghGetSha();
-    // Merge current memo/favorite into payload (preserve cron-baked insights)
-    const payload = {
-      updated_at: state.updated_at,
-      ...(state.insights ? { insights: state.insights } : {}),
-      etfs: state.etfs.map(e => ({
-        name: e.name, ticker: e.ticker, category: e.category, description: e.description, sector: e.sector,
-        currency: e.currency, price_native: e.price_native, price_change_pct: e.price_change_pct,
-        price_history: e.price_history, price_history_3y: e.price_history_3y,
-        price_history_3m: e.price_history_3m || [],
-        naver_code: e.naver_code, naver_path: e.naver_path,
-        favorite: !!e.favorite, memo: e.memo || '',
-      })),
-    };
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
-    const r = await fetch(`https://api.github.com/repos/${GH.OWNER}/${GH.REPO}/contents/${GH.PATH}`, {
-      method:'PUT',
-      headers: { 'Authorization': `token ${pat}`, 'Accept':'application/vnd.github+json' },
-      body: JSON.stringify({
-        message: `update memos/favorites (${new Date().toISOString()})`,
-        content, sha, branch: GH.BRANCH,
-      })
-    });
-    if(!r.ok){ const t = await r.text(); throw new Error(`PUT HTTP ${r.status} ${t.slice(0,100)}`); }
+    await commitToGithubCore();
     toast('✓ GitHub에 커밋 완료', 'ok');
   } catch(e){
     toast('커밋 실패: ' + e.message, 'err');
@@ -1101,6 +1108,28 @@ async function commitToGithub(){
     btn.disabled = false; btn.textContent = origText;
   }
 }
+
+/* ── Stock Valuation 대시보드 통합 커밋 (iframe 내장 시) ── */
+(function(){
+  if (window.self === window.top) return;
+  // 대시보드 탭 안에서는 자체 커밋 버튼 숨김 (통합 버튼으로 일원화)
+  const _b=document.getElementById('gh-commit-btn'); if(_b) _b.style.display='none';
+  window.addEventListener('message', async function(e){
+    if (e.origin !== 'https://whysosary-dot.github.io' || !e.data || !e.data.type) return;
+    if (e.data.type === 'sv-ping'){ e.source.postMessage({type:'sv-pong', repo:'etf-monitor'}, e.origin); return; }
+    if (e.data.type !== 'sv-commit') return;
+    let ok=true, msg='커밋 완료';
+    try {
+      // etfs.json 로딩이 아직이면 최대 8초 대기
+      let waited=0;
+      while((!state || !state.etfs || !state.etfs.length) && waited<8000){
+        await new Promise(r=>setTimeout(r,400)); waited+=400;
+      }
+      await commitToGithubCore();
+    } catch(err){ ok=false; msg=err.message||String(err); }
+    e.source.postMessage({type:'sv-commit-result', repo:'etf-monitor', ok:ok, msg:msg}, e.origin);
+  });
+})();
 
 /* PAT modal */
 function openPatModal(){
