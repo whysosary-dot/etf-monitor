@@ -458,7 +458,7 @@
   <button id="fav-filter-btn" class="btn" title="즐겨찾기만">⭐ 즐겨찾기</button>
   <button id="insights-btn" class="btn insights-btn" title="돈의 흐름 인사이트">🔥 인사이트</button>
   <button id="gh-commit-btn" class="gh-commit-btn" title="메모/즐겨찾기 GitHub에 커밋">☁️ 커밋</button>
-  <button id="gh-settings-btn" class="gh-settings-btn" title="GitHub PAT 설정">⚙️</button>
+  <!-- PAT 설정 버튼 제거 — 대시보드 ⚙️의 공용 토큰(sv_github_pat)을 사용 -->
 </div>
 
 <div class="table-wrap">
@@ -1524,7 +1524,7 @@ async function init(){
   document.getElementById('insights-modal').addEventListener('click', e => { if(e.target.id==='insights-modal') closeInsightsModal(); });
 
   document.getElementById('gh-commit-btn').addEventListener('click', commitToGithub);
-  document.getElementById('gh-settings-btn').addEventListener('click', openPatModal);
+  document.getElementById('gh-settings-btn')?.addEventListener('click', openPatModal);
   document.getElementById('pat-close').addEventListener('click', closePatModal);
   document.getElementById('pat-modal').addEventListener('click', e => { if(e.target.id==='pat-modal') closePatModal(); });
   document.getElementById('pat-save').addEventListener('click', () => {
