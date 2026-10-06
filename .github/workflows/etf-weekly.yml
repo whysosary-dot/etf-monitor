@@ -1,0 +1,36 @@
+name: etf-weekly
+# 매주 토요일 06:00 KST — 117개 ETF 가격·차트·인사이트 갱신 → etfs.json 커밋
+on:
+  schedule:
+    - cron: '0 21 * * 5'   # 토 06:00 KST
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: etf-weekly
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q yfinance
+      - name: weekly update
+        env:
+          TZ: Asia/Seoul
+        run: python scripts/weekly_update.py | tee run.log
+      - name: commit
+        run: |
+          git config user.name whysosary-dot
+          git config user.email whysosary@naver.com
+          if git diff --quiet etfs.json; then echo "변동 없음 — 커밋 스킵"; else
+            git add etfs.json && git commit -q -m "weekly update $(TZ=Asia/Seoul date +%F) + insights" && git push -q origin HEAD:main && echo "✅ pushed $(git rev-parse --short HEAD)"; fi
+      - name: rebuild pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api -X POST repos/${{ github.repository }}/pages/builds || true
