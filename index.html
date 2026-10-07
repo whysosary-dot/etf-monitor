@@ -264,6 +264,9 @@
     padding-left: 16px;
   }
 
+  .dsel{display:inline-flex;align-items:center;gap:4px}
+  .dsel .btn{padding:9px 10px}
+  .dsel .btn:disabled{opacity:.35;cursor:default}
   /* select */
   .topbar select.sector-filter, .topbar select.cat-filter {
     background: var(--panel); border: 1px solid var(--border-strong); color: var(--text);
@@ -456,6 +459,7 @@ body{background:var(--bg) !important;color:var(--text) !important;font-family:va
   <h1><span class="dot"></span>ETF Monitor</h1>
   <span class="meta" id="meta"></span>
   <span class="spacer"></span>
+  <span class="dsel" id="dsel-wrap" title="주간 스냅샷 날짜"><button id="d-prev" class="btn" aria-label="이전 주">◀</button><select id="d-sel" class="cat-filter"></select><button id="d-next" class="btn" aria-label="다음 주">▶</button></span>
   <input id="filter" class="filter" placeholder="검색 (이름·티커·설명)" />
   <select id="cat-filter" class="cat-filter" title="분류 필터"></select>
   <select id="sector-filter" class="sector-filter" title="섹터 필터"></select>
@@ -1073,6 +1077,8 @@ async function commitToGithubCore(){
   const pat = getPat();
   if(!pat) throw new Error('PAT 미설정');
   if(!state || !state.etfs || !state.etfs.length) throw new Error('데이터 로딩 전');
+  // 과거 스냅샷을 보는 중에는 커밋 금지 — 옛 가격 데이터로 etfs.json 을 덮어쓰게 됨
+  if(state.snapDates && state.snapDate && state.snapDates.indexOf(state.snapDate) !== 0) throw new Error('과거 스냅샷 보는 중 — 최신 날짜로 돌아간 뒤 커밋하세요');
   const sha = await ghGetSha();
   // Merge current memo/favorite into payload (preserve cron-baked insights)
   const payload = {
@@ -1516,6 +1522,38 @@ async function init(){
   }
 
   render();
+
+  // ── 주간 스냅샷 날짜 선택 (snapshots/index.json). 최신 = etfs.json 그대로, 과거 = snapshots/<날짜>.json
+  state.baseData = data;
+  try {
+    const r = await fetch('snapshots/index.json?t=' + Date.now(), { cache: 'no-store' });
+    const idx = r.ok ? await r.json() : null;
+    const dates = (idx && idx.dates) || [];
+    const sel = document.getElementById('d-sel');
+    if (dates.length) {
+      sel.innerHTML = dates.map((d, i) => `<option value="${d}">${d}${i === 0 ? ' (최신)' : ''}</option>`).join('');
+      state.snapDates = dates; state.snapDate = dates[0];
+      const syncBtns = () => { const k = dates.indexOf(state.snapDate); document.getElementById('d-prev').disabled = !(k >= 0 && k < dates.length - 1); document.getElementById('d-next').disabled = !(k > 0); sel.value = state.snapDate; };
+      const loadSnap = async (d) => {
+        state.snapDate = d; syncBtns();
+        let snap = state.baseData;
+        if (dates.indexOf(d) !== 0) {
+          try { const rr = await fetch(`snapshots/${d}.json?t=${Date.now()}`, { cache: 'no-store' }); snap = await rr.json(); }
+          catch (e) { toast('스냅샷을 불러오지 못했습니다','err'); return; }
+        }
+        state.etfs = snap.etfs.map(e => ({...e}));
+        state.updated_at = snap.updated_at || '';
+        state.insights = snap.insights || null;
+        const user = loadUserInputs();
+        for (const s of state.etfs) { const u = user[s.ticker]; if (!u) continue; if (u.memo) s.memo = u.memo; if (u.favorite) s.favorite = true; }
+        render();
+      };
+      sel.addEventListener('change', e => loadSnap(e.target.value));
+      document.getElementById('d-prev').addEventListener('click', () => { const k = dates.indexOf(state.snapDate); if (k < dates.length - 1) loadSnap(dates[k + 1]); });
+      document.getElementById('d-next').addEventListener('click', () => { const k = dates.indexOf(state.snapDate); if (k > 0) loadSnap(dates[k - 1]); });
+      syncBtns();
+    } else { document.getElementById('dsel-wrap').style.display = 'none'; }
+  } catch (e) { document.getElementById('dsel-wrap').style.display = 'none'; }
 
   // events
   document.getElementById('filter').addEventListener('input', e => { state.filter = e.target.value; render(); });

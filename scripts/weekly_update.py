@@ -9,7 +9,7 @@ try:
     if p: sys.path.insert(0, p[0])
 except Exception: pass
 import yfinance as yf
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from collections import defaultdict
 
 args = sys.argv[1:]
@@ -169,6 +169,23 @@ data['updated_at'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
 
 with open('etfs.json','w') as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
+
+# 날짜별 스냅샷 보관 (대시보드 ◀ 날짜 ▶ 선택용) — snapshots/<KST 날짜>.json + index.json
+import os
+_kst = datetime.now(timezone.utc) + timedelta(hours=9)
+_d = _kst.strftime('%Y-%m-%d')
+os.makedirs('snapshots', exist_ok=True)
+with open(f'snapshots/{_d}.json', 'w') as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+_ip = 'snapshots/index.json'
+try:
+    _idx = json.load(open(_ip))
+except Exception:
+    _idx = {'dates': []}
+_idx['dates'] = sorted(set(_idx.get('dates', [])) | {_d}, reverse=True)
+with open(_ip, 'w') as f:
+    json.dump(_idx, f, ensure_ascii=False, indent=1)
+print(f'snapshot saved: snapshots/{_d}.json ({len(_idx["dates"])} dates)')
 
 print('\n=== 이번 주 인사이트 ===')
 for v in verdict: print(' •', v)
