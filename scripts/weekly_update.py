@@ -186,6 +186,12 @@ _idx['dates'] = sorted(set(_idx.get('dates', [])) | {_d}, reverse=True)
 with open(_ip, 'w') as f:
     json.dump(_idx, f, ensure_ascii=False, indent=1)
 print(f'snapshot saved: snapshots/{_d}.json ({len(_idx["dates"])} dates)')
+# 예약 작업의 커밋 명령이 etfs.json 만 add 하므로, 스냅샷은 여기서 미리 스테이징해 같은 커밋에 실리게 한다 (git 저장소가 아니면 무시)
+try:
+    import subprocess
+    subprocess.run(['git', 'add', 'snapshots'], check=False, capture_output=True)
+except Exception:
+    pass
 
 print('\n=== 이번 주 인사이트 ===')
 for v in verdict: print(' •', v)
