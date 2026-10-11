@@ -413,6 +413,15 @@
     border-radius: 10px; padding: 12px 14px; font-size: 14px; line-height: 1.6;
   }
   .insights-body .verdict b { color: #4a3500; }
+  .new-badge { margin-left: 6px; font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 6px; background: #dcfce7; color: #166534; vertical-align: middle; }
+  .insights-body .narr { display: grid; gap: 8px; }
+  .insights-body .narr-c { border: 1px solid var(--border); border-left: 4px solid #f59e0b; border-radius: 10px; padding: 10px 13px; background: var(--panel); }
+  .insights-body .narr-c .t { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
+  .insights-body .narr-c .b { font-size: 13.5px; line-height: 1.7; color: var(--text); }
+  .insights-body .ins-note { font-size: 12px; color: var(--text-dim); margin: 4px 0 8px; line-height: 1.55; }
+  .insights-body .tag-trk { font-size: 10.5px; font-weight: 700; padding: 1px 5px; border-radius: 5px; background: var(--panel-2); color: var(--text-dim); }
+  .insights-body .tag-trk.on { background: #e0f2fe; color: #075985; }
+  .insights-body .ins-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .insights-body .badge {
     display: inline-block; padding: 1px 7px; font-size: 11px; font-weight: 600;
     border-radius: 999px; margin-right: 4px;
@@ -765,6 +774,12 @@ function renderRow(s){
       a.rel = 'noopener noreferrer';
       a.textContent = s.name || '';
       wrap.appendChild(a);
+      if (s.added_at && (Date.now() - Date.parse(s.added_at)) < 21*864e5) {
+        const nb = document.createElement('span'); nb.className = 'new-badge';
+        nb.textContent = s.auto_added ? 'AUTO' : 'NEW';
+        nb.title = (s.auto_added ? '자동 편입 ' : '편입 ') + s.added_at;
+        wrap.appendChild(nb);
+      }
       td.appendChild(wrap);
     } else if(c.type === 'ro-text'){
       td.classList.add('readonly-cell');
@@ -1091,6 +1106,7 @@ async function commitToGithubCore(){
       price_history_3m: e.price_history_3m || [],
       naver_code: e.naver_code, naver_path: e.naver_path,
       favorite: !!e.favorite, memo: e.memo || '',
+      ...(e.added_at ? { added_at: e.added_at } : {}), ...(e.auto_added ? { auto_added: e.auto_added } : {}),
     })),
   };
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
@@ -1316,11 +1332,12 @@ function inflatePrecomputed(pre){
     accel:      (pre.accel      || []).map(re),
     reversal:   (pre.reversal   || []).map(re),
     rebound:    (pre.rebound    || []).map(re),
-    mood: (pre.verdict && pre.verdict[0]) ? (pre.verdict[0].includes('강세') ? '강세 우위' : pre.verdict[0].includes('약세') ? '약세 우위' : '중립/혼조') : '중립/혼조',
-    moodCls: (pre.verdict && pre.verdict[0]) ? (pre.verdict[0].includes('강세') ? 'b-bull' : pre.verdict[0].includes('약세') ? 'b-bear' : 'b-neutral') : 'b-neutral',
+    mood: pre.mood ? pre.mood : (pre.verdict && pre.verdict[0]) ? (pre.verdict[0].includes('강세') ? '강세 우위' : pre.verdict[0].includes('약세') ? '약세 우위' : '중립/혼조') : '중립/혼조',
+    moodCls: pre.mood ? (pre.mood.includes('강세') ? 'b-bull' : pre.mood.includes('약세') ? 'b-bear' : 'b-neutral') : (pre.verdict && pre.verdict[0]) ? (pre.verdict[0].includes('강세') ? 'b-bull' : pre.verdict[0].includes('약세') ? 'b-bear' : 'b-neutral') : 'b-neutral',
     flowComment: pre.verdict || [],
     _precomputed: true,
     _computedAt: pre.computed_at || '',
+    _pre: pre,
   };
 }
 
@@ -1425,16 +1442,78 @@ function renderInsights(){
     </table>
   ` : `<p class="dim" style="margin:6px 0">${label}에 해당하는 종목 없음</p>`;
 
+  const P = I._pre || {};
+  const won = v => v == null ? '—' : (Math.round(v)).toLocaleString('ko-KR');
+  const sgnWon = v => v == null ? '—' : (v > 0 ? '+' : '') + Math.round(v).toLocaleString('ko-KR') + '억';
+  const navLink = (code, name) => `<a href="https://m.stock.naver.com/domestic/stock/${code}/total" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">${escapeHtml(name)}</a>`;
+  const trk = t => t ? '<span class="tag-trk on">추적중</span>' : '<span class="tag-trk">미추적</span>';
+  const tbl = (head, rows) => `<div class="ins-wrap"><table class="ins-tbl"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+  const rCells = r => ['week','month','quarter','year'].map(k => `<td class="${pctCls(r && r[k])}">${pctFmt(r && r[k])}</td>`).join('');
+
+  const narrHtml = (P.narrative || []).length ? `<div class="section"><h3>📝 이번 주 해설 <span class="h-meta">(가격·자금 데이터 규칙 기반 자동 해설 — 투자 권유 아님)</span></h3>
+    <div class="narr">${P.narrative.map(n => `<div class="narr-c"><div class="t">${escapeHtml(n.title)}</div><div class="b">${escapeHtml(n.body)}</div></div>`).join('')}</div></div>` : '';
+
+  const crossHtml = (P.cross || []).length ? `<div class="section"><h3>🌐 크로스에셋 <span class="h-meta">(금리·신용·금·달러·코인·한국 원화/달러)</span></h3>
+    ${tbl('<th class="l">자산</th><th class="l">읽는 법</th><th>1주</th><th>1개월</th><th>3개월</th><th>1년</th><th>52주 위치</th>',
+      P.cross.map(c => `<tr><td class="l name-c" style="font-weight:600">${escapeHtml(c.label)} <span class="dim" style="font-size:11px">${escapeHtml(c.ticker.replace('.KS',''))}</span></td><td class="l sec-c">${escapeHtml(c.hint)}</td>${rCells(c.r)}<td>${c.pos52==null?'—':c.pos52.toFixed(0)+'%'}</td></tr>`).join(''))}
+    ${P.risk && P.risk.week != null ? `<p class="ins-note">위험선호 스프레드(성장·경기민감 바스켓 − 방어 바스켓): 1주 <b>${P.risk.week>0?'+':''}${P.risk.week.toFixed(2)}%p</b> · 1개월 <b>${P.risk.month==null?'—':(P.risk.month>0?'+':'')+P.risk.month.toFixed(2)+'%p'}</b> · 3개월 <b>${P.risk.quarter==null?'—':(P.risk.quarter>0?'+':'')+P.risk.quarter.toFixed(2)+'%p'}</b> — 양수면 위험선호, 음수면 방어 우위</p>` : ''}
+  </div>` : '';
+
+  const F = P.flows || {};
+  const flowRows = arr => arr.map(x => `<tr><td class="l name-c">${navLink(x.code, x.name)} ${trk(x.tracked)}</td><td class="l sec-c">${escapeHtml(x.tab)}</td><td class="${pctCls(x.flow)}">${sgnWon(x.flow)}</td><td>${won(x.aum)}억</td></tr>`).join('');
+  const flowHtml = `<div class="section"><h3>💸 국내 상장 ETF 자금 흐름 <span class="h-meta">(전체 ${F.n||'—'}개 · 추정 순유입 = AUM 변화 − 가격효과${F.prev_date ? ` · ${F.prev_date} → ${F.date}` : ''})</span></h3>
+    ${(F.groups||[]).length ? tbl('<th class="l">그룹</th><th>종목수</th><th>추정 순유입</th><th>AUM 대비</th><th class="l">최대 유입 / 최대 유출</th>',
+        F.groups.map(g => `<tr><td class="l" style="font-weight:600">${escapeHtml(g.group)}</td><td>${g.n}</td><td class="${pctCls(g.flow)}">${sgnWon(g.flow)}</td><td class="${pctCls(g.pct)}">${g.pct==null?'—':(g.pct>0?'+':'')+g.pct.toFixed(2)+'%'}</td><td class="l sec-c">${escapeHtml(g.best[0])} ${sgnWon(g.best[1])} / ${escapeHtml(g.worst[0])} ${sgnWon(g.worst[1])}</td></tr>`).join(''))
+      + `<div class="row-grid"><div><h3>⬆ 순유입 TOP</h3>${tbl('<th class="l">ETF</th><th class="l">구분</th><th>순유입</th><th>AUM</th>', flowRows(F.top||[]))}</div>
+         <div><h3>⬇ 순유출 TOP</h3>${tbl('<th class="l">ETF</th><th class="l">구분</th><th>순유출</th><th>AUM</th>', flowRows(F.bot||[]))}</div></div>`
+      : `<p class="ins-note">국내 ETF 전체 스냅샷을 ${escapeHtml(F.date||'')}부터 쌓기 시작했습니다. 다음 주 갱신부터 주간 추정 순유입이 여기에 표시됩니다.</p>`}
+  </div>`;
+
+  const sentHtml = (P.sentiment || []).length ? `<div class="section"><h3>🎲 개인 심리 — 레버리지·인버스</h3>
+    ${tbl('<th class="l">상품</th><th>추정 순유입</th><th>AUM</th><th>거래대금</th><th>1주</th><th>1개월</th>',
+      P.sentiment.map(x => `<tr><td class="l name-c">${navLink(x.code, x.label)}</td><td class="${pctCls(x.flow)}">${sgnWon(x.flow)}</td><td>${x.aum==null?'—':won(x.aum)+'억'}</td><td>${x.amt==null?'—':won(x.amt/100)+'억'}</td><td class="${pctCls(x.r&&x.r.week)}">${pctFmt(x.r&&x.r.week)}</td><td class="${pctCls(x.r&&x.r.month)}">${pctFmt(x.r&&x.r.month)}</td></tr>`).join(''))}
+    <p class="ins-note">레버리지 유입·인버스 유출이 동시에 커지면 개인 과열, 반대로 인버스(곱버스)에 돈이 몰리면 비관 극단 — 역발상 지표로 본다.</p></div>` : '';
+
+  const rotRows = arr => arr.map(x => `<tr><td class="l" style="font-weight:600">${escapeHtml(x.sector)}</td><td>${x.rank_q}위 → ${x.rank_m}위</td><td class="${pctCls(x.month)}">${pctFmt(x.month)}</td><td class="${pctCls(x.quarter)}">${pctFmt(x.quarter)}</td></tr>`).join('');
+  const rotHtml = ((P.rotation_up||[]).length || (P.rotation_dn||[]).length) ? `<div class="section"><h3>🔄 섹터 로테이션 <span class="h-meta">(3개월 순위 → 1개월 순위)</span></h3><div class="row-grid">
+    <div><h3>⬆ 새로 올라온 섹터</h3>${tbl('<th class="l">섹터</th><th>순위</th><th>1개월</th><th>3개월</th>', rotRows(P.rotation_up||[]))}</div>
+    <div><h3>⬇ 힘 빠지는 섹터</h3>${tbl('<th class="l">섹터</th><th>순위</th><th>1개월</th><th>3개월</th>', rotRows(P.rotation_dn||[]))}</div></div></div>` : '';
+
+  const hlRows = arr => arr.map(d => `<tr><td class="l name-c">${nameLinkHtml(d)}</td><td class="l sec-c">${escapeHtml(normSector(d.sector))}</td><td>${d.pos52==null?'—':d.pos52.toFixed(0)+'%'}</td><td class="${pctCls(d.r.quarter)}">${pctFmt(d.r.quarter)}</td></tr>`).join('');
+  const hlHtml = ((P.highs||[]).length || (P.lows||[]).length) ? `<div class="section"><h3>🏔 52주 신고가 · 신저가 부근 <span class="h-meta">(1년 주봉 범위 내 위치)</span></h3><div class="row-grid">
+    <div><h3>⛰ 고점 부근 (95%+)</h3>${tbl('<th class="l">ETF</th><th class="l">섹터</th><th>위치</th><th>3개월</th>', hlRows(P.highs||[]))}</div>
+    <div><h3>🕳 저점 부근 (5% 이하)</h3>${tbl('<th class="l">ETF</th><th class="l">섹터</th><th>위치</th><th>3개월</th>', hlRows(P.lows||[]))}</div></div></div>` : '';
+
+  const uRows = (arr, showFlow) => arr.map(x => `<tr><td class="l name-c">${navLink(x.code, x.name)} ${trk(x.tracked)}</td><td class="l sec-c">${escapeHtml(x.tab)}</td><td>${won(x.aum)}억</td><td>${won(x.amt/100)}억</td><td class="${pctCls(x.r3m)}">${x.r3m ? pctFmt(x.r3m) : '—'}</td>${showFlow ? `<td class="${pctCls(x.flow)}">${sgnWon(x.flow)}</td>` : ''}</tr>`).join('');
+  const hasFlow = !!(F.top||[]).length;
+  const newHtml = `<div class="section"><h3>🆕 최근 상장 ETF <span class="h-meta">(KRX 신규 코드 순 · 채권·레버리지·커버드콜·혼합 제외)</span></h3>
+    ${(P.new_listings||[]).length ? `<p class="ins-note"><b>이번 주 새로 상장:</b> ${P.new_listings.map(x => escapeHtml(x.name) + ' (' + won(x.aum) + '억)').join(', ')}</p>` : ''}
+    ${tbl('<th class="l">ETF</th><th class="l">구분</th><th>AUM</th><th>거래대금</th><th>3개월</th>' + (hasFlow ? '<th>순유입</th>' : ''), uRows(P.recent_listed||[], hasFlow))}</div>`;
+  const missedHtml = (P.missed||[]).length ? `<div class="section"><h3>🔎 놓친 ETF 후보 <span class="h-meta">(미추적 · 테마/해외/원자재 · AUM 300억+ · ${hasFlow ? '순유입 순' : '거래대금 순'})</span></h3>
+    ${tbl('<th class="l">ETF</th><th class="l">구분</th><th>AUM</th><th>거래대금</th><th>3개월</th>' + (hasFlow ? '<th>순유입</th>' : ''), uRows(P.missed, hasFlow))}
+    <p class="ins-note">주간 추정 순유입 300억+ 이거나 새로 상장해 AUM 300억+ 인 테마 ETF는 매주 갱신 때 최대 3개까지 자동으로 목록에 편입됩니다(이름 옆 AUTO 표시).</p></div>` : '';
+  const addedHtml = (P.auto_added||[]).length ? `<div class="section"><h3>➕ 이번 주 자동 편입</h3>${tbl('<th class="l">ETF</th><th class="l">섹터</th><th class="l">사유</th>', P.auto_added.map(a => `<tr><td class="l name-c">${navLink(a.code, a.name)}</td><td class="l sec-c">${escapeHtml(a.sector)}</td><td class="l sec-c">${escapeHtml(a.reason)}</td></tr>`).join(''))}</div>` : '';
+
   body.innerHTML = `
     <div class="section">
-      <h3>📊 전체 시장 스냅샷 <span class="h-meta">(${state.etfs.length}개 ETF · 평균 수익률 · 상승 종목 비중)</span></h3>
+      <h3>📊 전체 시장 스냅샷 <span class="h-meta">(주식형 ${I.overview[0] ? I.overview[0].n : state.etfs.length}개 ETF · 평균 수익률 · 상승 종목 비중 — 크로스에셋·심리지표 제외)</span></h3>
       ${overviewHtml}
     </div>
+    ${narrHtml}
 
     <div class="section">
       <h3>🎯 종합 의견</h3>
       ${verdictHtml}
     </div>
+
+    ${crossHtml}
+    ${flowHtml}
+    ${sentHtml}
+    ${rotHtml}
+    ${hlHtml}
+    ${addedHtml}
+    ${newHtml}
+    ${missedHtml}
 
     <div class="section">
       <h3>🔥 섹터별 모멘텀 <span class="h-meta">(주간 평균 수익률 순)</span></h3>
