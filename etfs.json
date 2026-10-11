@@ -2656,7 +2656,8 @@
       "naver_code": "SPY",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SPDR S&P MidCap 400 ETF Trust",
@@ -2951,7 +2952,8 @@
       "naver_code": "MDY",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI Taiwan ETF",
@@ -3246,7 +3248,8 @@
       "naver_code": "EWT",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI Japan ETF",
@@ -3541,7 +3544,8 @@
       "naver_code": "EWJ",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Vanguard FTSE Emerging Markets ETF",
@@ -3836,7 +3840,8 @@
       "naver_code": "VWO",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI China ETF",
@@ -4131,7 +4136,8 @@
       "naver_code": "MCHI.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI India ETF",
@@ -4426,7 +4432,8 @@
       "naver_code": "INDA.K",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI United Kingdom ETF",
@@ -4721,7 +4728,8 @@
       "naver_code": "EWU",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI France ETF",
@@ -5016,7 +5024,8 @@
       "naver_code": "EWQ",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI Germany ETF",
@@ -5311,7 +5320,8 @@
       "naver_code": "EWG",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Latin America 40 ETF",
@@ -5606,7 +5616,8 @@
       "naver_code": "ILF",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI Australia ETF",
@@ -5901,7 +5912,8 @@
       "naver_code": "EWA",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI Canada ETF",
@@ -6196,7 +6208,8 @@
       "naver_code": "EWC",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "VanEck Semiconductor ETF",
@@ -6491,7 +6504,8 @@
       "naver_code": "SMH.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "VanEck Oil Services ETF",
@@ -6786,7 +6800,8 @@
       "naver_code": "OIH",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Vanguard Health Care ETF",
@@ -7081,7 +7096,8 @@
       "naver_code": "VHT",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares U.S. Aerospace & Defense ETF",
@@ -7376,7 +7392,8 @@
       "naver_code": "ITA",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Technology Select Sector SPDR Fund",
@@ -7671,7 +7688,8 @@
       "naver_code": "XLK",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Industrial Select Sector SPDR Fund",
@@ -7966,7 +7984,8 @@
       "naver_code": "XLI",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Biotechnology ETF",
@@ -8261,7 +8280,8 @@
       "naver_code": "IBB.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SPDR S&P Oil & Gas Exploration & Production",
@@ -8556,7 +8576,8 @@
       "naver_code": "XOP",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Health Care Select Sector SPDR Fund",
@@ -8851,7 +8872,8 @@
       "naver_code": "XLV",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SPDR S&P Biotech ETF",
@@ -9146,7 +9168,8 @@
       "naver_code": "XBI",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares U.S. Insurance ETF",
@@ -9441,7 +9464,8 @@
       "naver_code": "IAK",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SPDR S&P Metals & Mining ETF",
@@ -9736,7 +9760,8 @@
       "naver_code": "XME",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Consumer Discretionary Select Sector SPDR",
@@ -10031,7 +10056,8 @@
       "naver_code": "XLY",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Communication Services Select Sector SPDR",
@@ -10326,7 +10352,8 @@
       "naver_code": "XLC",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Vanguard Information Technology ETF",
@@ -10621,7 +10648,8 @@
       "naver_code": "VGT",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "VanEck Pharmaceutical ETF",
@@ -10916,7 +10944,8 @@
       "naver_code": "PPH.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "VanEck Gold Miners ETF",
@@ -11211,7 +11240,8 @@
       "naver_code": "GDX",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Vanguard Real Estate ETF",
@@ -11506,7 +11536,8 @@
       "naver_code": "VNQ",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X Copper Miners ETF",
@@ -11801,7 +11832,8 @@
       "naver_code": "COPX.K",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X Lithium & Battery Tech ETF",
@@ -12096,7 +12128,8 @@
       "naver_code": "LIT",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares U.S. Home Construction ETF",
@@ -12391,7 +12424,8 @@
       "naver_code": "ITB",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Expanded Tech-Software Sector ETF",
@@ -12686,7 +12720,8 @@
       "naver_code": "IGV",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Consumer Staples Select Sector SPDR Fund",
@@ -12981,7 +13016,8 @@
       "naver_code": "XLP",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Invesco KBW Bank ETF",
@@ -13276,7 +13312,8 @@
       "naver_code": "KBWB.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SPDR S&P Retail ETF",
@@ -13571,7 +13608,8 @@
       "naver_code": "XRT",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Silver Trust",
@@ -13866,7 +13904,8 @@
       "naver_code": "SLV",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares U.S. Transportation ETF",
@@ -14161,7 +14200,8 @@
       "naver_code": "IYT",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SPDR S&P Regional Banking ETF",
@@ -14456,7 +14496,8 @@
       "naver_code": "KRE",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Global Infrastructure ETF",
@@ -14751,7 +14792,8 @@
       "naver_code": "IGF.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Invesco Solar ETF",
@@ -15046,7 +15088,8 @@
       "naver_code": "TAN",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Energy Select Sector SPDR Fund",
@@ -15341,7 +15384,8 @@
       "naver_code": "XLE",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X U.S. Infrastructure Development ETF",
@@ -15636,7 +15680,8 @@
       "naver_code": "PAVE.K",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X Uranium ETF",
@@ -15931,7 +15976,8 @@
       "naver_code": "URA",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Materials Select Sector SPDR Fund",
@@ -16226,7 +16272,8 @@
       "naver_code": "XLB",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares U.S. Healthcare Providers ETF",
@@ -16521,7 +16568,8 @@
       "naver_code": "IHF",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Financial Select Sector SPDR Fund",
@@ -16816,7 +16864,8 @@
       "naver_code": "XLF",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X Social Media ETF",
@@ -17111,7 +17160,8 @@
       "naver_code": "SOCL.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Utilities Select Sector SPDR Fund",
@@ -17406,7 +17456,8 @@
       "naver_code": "XLU",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "ProShares S&P Kensho Cleantech ETF",
@@ -17700,7 +17751,8 @@
       "naver_code": "CTEX.K",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X Robotics & Artificial Intelligence ETF",
@@ -17995,7 +18047,8 @@
       "naver_code": "BOTZ.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Data Center REITs & Digital Infra",
@@ -18290,7 +18343,8 @@
       "naver_code": "DTCR.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X Cybersecurity ETF",
@@ -18585,7 +18639,8 @@
       "naver_code": "BUG.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Global Clean Energy ETF",
@@ -18880,7 +18935,8 @@
       "naver_code": "ICLN.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "United States Natural Gas Fund",
@@ -19175,7 +19231,8 @@
       "naver_code": "UNG",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "VanEck Retail ETF",
@@ -19470,7 +19527,8 @@
       "naver_code": "RTH.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Global Industrials ETF",
@@ -19765,7 +19823,8 @@
       "naver_code": "EXI",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Pacer Benchmark Data & Infrastructure Real Estate",
@@ -20060,7 +20119,8 @@
       "naver_code": "SRVR.K",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Invesco Food & Beverage ETF",
@@ -20355,7 +20415,8 @@
       "naver_code": "PBJ",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X Video Games & Esports ETF",
@@ -20650,7 +20711,8 @@
       "naver_code": "HERO.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "HANARO 글로벌 럭셔리 S&P",
@@ -20942,7 +21004,8 @@
       "naver_code": "354350",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Global X Genomics & Biotechnology ETF",
@@ -21237,7 +21300,8 @@
       "naver_code": "GNOM.O",
       "naver_path": "worldstock/etf",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KBSTAR 글로벌 원자력 iSelect",
@@ -21529,7 +21593,8 @@
       "naver_code": "442320",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX KOREA Value-up ETF",
@@ -21765,7 +21830,8 @@
       "naver_code": "495850",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "MIRAE ASSET TIGER Shipbuilding TOP10 ETF",
@@ -22003,7 +22069,8 @@
       "naver_code": "494670",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "NH-Amundi HANARO Electric Power Capex ETF",
@@ -22245,7 +22312,8 @@
       "naver_code": "491820",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX AI Electric Power Core Facilities ETF",
@@ -22498,7 +22566,8 @@
       "naver_code": "487240",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KIM ACE KPOP Focus ETF",
@@ -22774,7 +22843,8 @@
       "naver_code": "475050",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX AI Semiconductor Core Equipment ETF",
@@ -23060,7 +23130,8 @@
       "naver_code": "471990",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "MIRAE ASSET TIGER Bank High Dividend Plus TOP 10 ETF",
@@ -23351,7 +23422,8 @@
       "naver_code": "466940",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "MIRAE ASSET TIGER K-DEFENSE INDUSTRY & SPACE ETF",
@@ -23643,7 +23715,8 @@
       "naver_code": "463250",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Hanwha PLUS K-Defense Industry ETF",
@@ -23935,7 +24008,8 @@
       "naver_code": "449450",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KIM ACE Next level Value Active ETF",
@@ -24227,7 +24301,8 @@
       "naver_code": "447430",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX Robot Active ETF",
@@ -24519,7 +24594,8 @@
       "naver_code": "445290",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "NH-Amundi HANARO K-Food ETF",
@@ -24811,7 +24887,8 @@
       "naver_code": "438900",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "NH-Amundi HANARO Nuclear Power",
@@ -25103,7 +25180,8 @@
       "naver_code": "434730",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "PLUS Aerospace & UAM iSelect ETF",
@@ -25395,7 +25473,8 @@
       "naver_code": "421320",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX AI Semiconductor TOP2 Plus ETF",
@@ -25687,7 +25766,8 @@
       "naver_code": "395160",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX Renewable Energy Active ETF",
@@ -25979,7 +26059,8 @@
       "naver_code": "385510",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger KRX Bio K-New Deal ETF",
@@ -26271,7 +26352,8 @@
       "naver_code": "364970",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "MIRAE ASSET TIGER REITS REAL ESTATE INFRA ETF",
@@ -26563,7 +26645,8 @@
       "naver_code": "329200",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "MIRAE ASSET TIGER HOLDINGS COMPANY ETF",
@@ -26855,7 +26938,8 @@
       "naver_code": "307520",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Secondary Battery Industry ETF",
@@ -27147,7 +27231,8 @@
       "naver_code": "305720",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Game Industry ETF",
@@ -27439,7 +27524,8 @@
       "naver_code": "300950",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset TIGER Korea TOP10 ETF",
@@ -27731,7 +27817,8 @@
       "naver_code": "292150",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX Consumer Discretionary ETF",
@@ -28023,7 +28110,8 @@
       "naver_code": "266390",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX K-Content ETF",
@@ -28315,7 +28403,8 @@
       "naver_code": "266360",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger Preferred Stock ETF",
@@ -28607,7 +28696,8 @@
       "naver_code": "261140",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX 200 Equalweight ETF",
@@ -28899,7 +28989,8 @@
       "naver_code": "252650",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX BIO ETF",
@@ -29191,7 +29282,8 @@
       "naver_code": "244580",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SAMSUNG KODEX KOSDAQ 150 ETF",
@@ -29483,7 +29575,8 @@
       "naver_code": "229200",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "MIRAE ASSET TIGER MEDIA CONTENTS ETF",
@@ -29775,7 +29868,8 @@
       "naver_code": "228810",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "MIRAE ASSET TIGER TOUR LEISURE ETF",
@@ -30067,7 +30161,8 @@
       "naver_code": "228800",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "MIRAE ASSET TIGER COSMETICS ETF",
@@ -30359,7 +30454,8 @@
       "naver_code": "228790",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Hanwha PLUS High Dividend ETF",
@@ -30651,7 +30747,8 @@
       "naver_code": "161510",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger Software ETF",
@@ -30943,7 +31040,8 @@
       "naver_code": "157490",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger China Consumer ETF",
@@ -31235,7 +31333,8 @@
       "naver_code": "150460",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger Health Care ETF",
@@ -31527,7 +31626,8 @@
       "naver_code": "143860",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Transportation ETF",
@@ -31819,7 +31919,8 @@
       "naver_code": "140710",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Insurance ETF",
@@ -32111,7 +32212,8 @@
       "naver_code": "140700",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger Consumer Staples ETF",
@@ -32403,7 +32505,8 @@
       "naver_code": "139280",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger Financials ETF",
@@ -32695,7 +32798,8 @@
       "naver_code": "139270",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger IT ETF",
@@ -32987,7 +33091,8 @@
       "naver_code": "139260",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset TIGER 200 Heavy Industry",
@@ -33279,7 +33384,8 @@
       "naver_code": "139230",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Mirae Asset Tiger Hyundai Motor Group ETF",
@@ -33571,7 +33677,8 @@
       "naver_code": "138540",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Constructions ETF",
@@ -33863,7 +33970,8 @@
       "naver_code": "117700",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Steels ETF",
@@ -34155,7 +34263,8 @@
       "naver_code": "117680",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Energy & Chemicals ETF",
@@ -34447,7 +34556,8 @@
       "naver_code": "117460",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Securities ETF",
@@ -34739,7 +34849,8 @@
       "naver_code": "102970",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Machinery & Equipment ETF",
@@ -35031,7 +35142,8 @@
       "naver_code": "102960",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Samsung Group ETF",
@@ -35323,7 +35435,8 @@
       "naver_code": "102780",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Autos ETF",
@@ -35615,7 +35728,8 @@
       "naver_code": "091180",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX Banks ETF",
@@ -35907,7 +36021,8 @@
       "naver_code": "091170",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Samsung KODEX 200 ETF",
@@ -36199,7 +36314,8 @@
       "naver_code": "069500",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Shinhan SOL Korea High Dividend ETF",
@@ -36389,7 +36505,8 @@
       "naver_code": "0105E0",
       "naver_path": "domestic/stock",
       "favorite": false,
-      "memo": ""
+      "memo": "",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Invesco QQQ Trust",
@@ -36685,7 +36802,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "QQQ.O",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Russell 2000 ETF",
@@ -36981,7 +37099,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "IWM",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Invesco S&P 500 Equal Weight ETF",
@@ -37277,7 +37396,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "RSP",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares MSCI South Korea ETF",
@@ -37573,7 +37693,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "EWY",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KraneShares CSI China Internet ETF",
@@ -37869,7 +37990,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "KWEB.K",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares 20+ Year Treasury Bond ETF",
@@ -38165,7 +38287,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "TLT.O",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
@@ -38461,7 +38584,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "HYG",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SPDR Gold Shares",
@@ -38757,7 +38881,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "GLD",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "iShares Bitcoin Trust ETF",
@@ -39040,7 +39165,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "IBIT.O",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Invesco DB US Dollar Index Bullish Fund",
@@ -39336,7 +39462,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "UUP",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "ARK Innovation ETF",
@@ -39632,7 +39759,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "ARKK.K",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "First Trust Nasdaq Clean Edge Smart Grid Infrastructure",
@@ -39928,7 +40056,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "GRID.O",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "Defiance Quantum ETF",
@@ -40224,7 +40353,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "QTUM.O",
-      "naver_path": "worldstock/etf"
+      "naver_path": "worldstock/etf",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "TIGER 미국S&P500",
@@ -40517,7 +40647,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "360750",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "TIGER 미국나스닥100",
@@ -40810,7 +40941,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "133690",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SOL AI반도체소부장",
@@ -41103,7 +41235,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "455850",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "PLUS 글로벌HBM반도체",
@@ -41396,7 +41529,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "442580",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX 미국AI전력핵심인프라",
@@ -41650,7 +41784,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "487230",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX 미국AI광통신네트워크",
@@ -41789,7 +41924,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "0173Y0",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "TIGER 미국우주테크",
@@ -41924,7 +42060,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "0183J0",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "TIGER 코리아휴머노이드로봇산업",
@@ -42087,7 +42224,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "0148J0",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SOL 미국양자컴퓨팅TOP10",
@@ -42306,7 +42444,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "0023A0",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "TIME 차이나AI테크액티브",
@@ -42516,7 +42655,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "0043Y0",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "ACE KRX금현물",
@@ -42809,7 +42949,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "411060",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX CD금리액티브(합성)",
@@ -43102,7 +43243,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "459580",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX 머니마켓액티브",
@@ -43352,7 +43494,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "488770",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX 레버리지",
@@ -43645,7 +43788,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "122630",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX 200선물인버스2X",
@@ -43938,7 +44082,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "252670",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX 코스닥150레버리지",
@@ -44231,7 +44376,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "233740",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX SK하이닉스단일종목레버리지",
@@ -44354,7 +44500,8 @@
       "memo": "",
       "added_at": "2026-10-11",
       "naver_code": "0193T0",
-      "naver_path": "domestic/stock"
+      "naver_path": "domestic/stock",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SOL 반도체전공정",
@@ -44629,7 +44776,8 @@
       "naver_path": "domestic/stock",
       "favorite": false,
       "memo": "",
-      "added_at": "2026-10-11"
+      "added_at": "2026-10-11",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SOL 반도체후공정",
@@ -44904,7 +45052,8 @@
       "naver_path": "domestic/stock",
       "favorite": false,
       "memo": "",
-      "added_at": "2026-10-11"
+      "added_at": "2026-10-11",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SOL 전고체배터리&실리콘음극재",
@@ -45132,7 +45281,8 @@
       "naver_path": "domestic/stock",
       "favorite": false,
       "memo": "",
-      "added_at": "2026-10-11"
+      "added_at": "2026-10-11",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "KODEX 미국AI메모리TOP2플러스",
@@ -45174,7 +45324,8 @@
       "naver_path": "domestic/stock",
       "favorite": false,
       "memo": "",
-      "added_at": "2026-10-11"
+      "added_at": "2026-10-11",
+      "priced_at": "2026-10-11"
     },
     {
       "name": "SOL 글로벌DRAM반도체플러스",
@@ -45198,7 +45349,8 @@
       "naver_path": "domestic/stock",
       "favorite": false,
       "memo": "",
-      "added_at": "2026-10-11"
+      "added_at": "2026-10-11",
+      "priced_at": "2026-10-11"
     }
   ]
 }

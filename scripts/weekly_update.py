@@ -51,6 +51,7 @@ def fetch_prices(e):
             last = float(cd[-1])
             if len(cd) >= 2: e['price_change_pct'] = round((cd[-1]/cd[-2]-1)*100, 2)
             e['price_native'] = round(last,0) if e['currency']=='KRW' else round(last,2)
+    e['priced_at'] = TODAY
 
 # 1) 가격/차트 갱신
 for i, e in enumerate(data['etfs'][start:end], start=start):
@@ -185,9 +186,9 @@ if flows:
             auto_added.append({'code':c,'name':v[0],'sector':e['sector'],'reason':e['description'],'aum':v[2],'flow':f})
             print('  + 자동 편입:', c, v[0], e['sector'])
 
-# 가격이 비어 있는 종목(새로 추가된 것 등)은 여기서 채운다
+# 가격이 비었거나 오늘 갱신되지 않은 종목(새로 추가·청크 실행 누락분)은 여기서 채운다
 for e in data['etfs']:
-    if not e.get('price_history'):
+    if not e.get('price_history') or e.get('priced_at') != TODAY:
         try: fetch_prices(e); print('  · 가격 보충', e['ticker'])
         except Exception as ex: print('  ! 가격 보충 실패', e['ticker'], ex)
 

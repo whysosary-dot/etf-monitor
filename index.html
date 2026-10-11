@@ -1108,7 +1108,7 @@ async function commitToGithubCore(){
       price_history_3m: e.price_history_3m || [],
       naver_code: e.naver_code, naver_path: e.naver_path,
       favorite: !!e.favorite, memo: e.memo || '',
-      ...(e.added_at ? { added_at: e.added_at } : {}), ...(e.auto_added ? { auto_added: e.auto_added } : {}),
+      ...(e.added_at ? { added_at: e.added_at } : {}), ...(e.auto_added ? { auto_added: e.auto_added } : {}), ...(e.priced_at ? { priced_at: e.priced_at } : {}),
     })),
   };
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
