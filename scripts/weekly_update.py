@@ -17,6 +17,9 @@ try:
     if p: sys.path.insert(0, p[0])
 except Exception: pass
 import yfinance as yf
+try:   # 맥 VM $HOME 이 가득 차면 yfinance 캐시(sqlite) 쓰기에서 죽음 → /tmp 로 (2026-10-12)
+    import os as _os; _c=f'/tmp/yfcache_{_os.getuid()}'; _os.makedirs(_c, exist_ok=True); yf.set_tz_cache_location(_c)
+except Exception: pass
 from datetime import datetime, timezone, timedelta
 from collections import defaultdict
 
