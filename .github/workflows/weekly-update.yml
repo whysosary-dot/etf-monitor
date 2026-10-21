@@ -1,0 +1,31 @@
+name: weekly-update
+# 매주 토요일 06:00 KST 117개 ETF 가격·차트·인사이트 갱신 (yfinance). cron 누락 대비 07:00 한 번 더
+on:
+  schedule:
+    - cron: '0 21 * * 5'
+    - cron: '0 22 * * 5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: weekly-update
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q yfinance
+      - name: weekly_update.py
+        run: |
+          python3 scripts/weekly_update.py 2>&1 | tail -40
+      - name: commit
+        run: |
+          git config user.email "whysosary@naver.com"
+          git config user.name "리송"
+          if git diff --quiet; then echo "변동 없음 — 커밋 스킵"; else
+            git add etfs.json && git commit -q -m "weekly update $(date -u -d '+9 hours' +%F) + insights (actions)" && git push -q && git log --oneline -1; fi
