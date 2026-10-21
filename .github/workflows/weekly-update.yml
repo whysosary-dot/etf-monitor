@@ -27,5 +27,6 @@ jobs:
         run: |
           git config user.email "whysosary@naver.com"
           git config user.name "리송"
-          if git diff --quiet; then echo "변동 없음 — 커밋 스킵"; else
-            git add etfs.json && git commit -q -m "weekly update $(date -u -d '+9 hours' +%F) + insights (actions)" && git push -q && git log --oneline -1; fi
+          git add -A etfs.json snapshots
+          if git diff --cached --quiet; then echo "변동 없음 — 커밋 스킵"; else
+            git commit -q -m "weekly update $(date -u -d '+9 hours' +%F) + insights (actions)" && git push -q && git log --oneline -1; fi
