@@ -418,6 +418,16 @@
   .new-badge { margin-left: 6px; font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 6px; background: #dcfce7; color: #166534; vertical-align: middle; }
   .insights-body .narr { display: grid; gap: 8px; }
   .insights-body .narr-c { border: 1px solid var(--border); border-left: 4px solid #f59e0b; border-radius: 10px; padding: 10px 13px; background: var(--panel); }
+  /* AI 인사이트 (stock-valuation/insights/etf.json — 스케줄 태스크 산출) */
+  .insights-body .ai-head { font-size: 15px; font-weight: 700; line-height: 1.45; margin: 4px 0 2px; }
+  .insights-body .ai-meta { font-size: 11.5px; color: var(--text-dim); margin-bottom: 8px; }
+  .insights-body .ai-meta.stale { color: #b45309; }
+  .insights-body .narr-c.ai { border-left-color: #6366f1; }
+  .insights-body .narr-c .b { white-space: pre-line; }
+  .insights-body .ai-tags { margin-top: 5px; display:flex; flex-wrap:wrap; gap:4px; }
+  .insights-body .ai-tag { font-size: 10.5px; padding: 1px 7px; border-radius: 999px; background: var(--header); color: var(--text-dim); border: 1px solid var(--border); }
+  .insights-body .ai-src { font-size: 11.5px; color: var(--text-dim); line-height: 1.5; margin-top: 6px; }
+  .insights-body .ai-src a { color: inherit; }
   .insights-body .narr-c .t { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
   .insights-body .narr-c .b { font-size: 13.5px; line-height: 1.7; color: var(--text); }
   .insights-body .ins-note { font-size: 12px; color: var(--text-dim); margin: 4px 0 8px; line-height: 1.55; }
@@ -1343,6 +1353,28 @@ function inflatePrecomputed(pre){
   };
 }
 
+async function loadAiInsight(){
+  const slot = document.getElementById('ai-ins-slot');
+  if(!slot) return;
+  const box = slot.querySelector('.ai-meta');
+  try{
+    const r = await fetch('https://raw.githubusercontent.com/whysosary-dot/stock-valuation/main/insights/etf.json?t=' + Math.floor(Date.now()/300000), { cache:'no-store' });
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    const ageDays = d.date ? Math.floor((Date.now() + 9*3600*1000 - new Date(d.date + 'T00:00:00Z').getTime()) / 86400000) : null;
+    const stale = ageDays != null && ageDays > 8;
+    let h = `<div class="ai-head">${escapeHtml(d.headline || '')}</div>`;
+    h += `<div class="ai-meta${stale ? ' stale' : ''}">${escapeHtml(d.date || '')} 생성${d.as_of ? ' · ' + escapeHtml(d.as_of) : ''}${stale ? ' · ⚠ 8일 넘게 갱신되지 않았습니다' : ''}</div>`;
+    h += `<div class="narr">${(d.insights || []).map(it => `<div class="narr-c ai"><div class="t">${escapeHtml(it.title)}</div><div class="b">${escapeHtml(it.body)}</div>${(it.tags||[]).length ? `<div class="ai-tags">${it.tags.map(t => `<span class="ai-tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}</div>`).join('')}`;
+    if((d.watch || []).length) h += `<div class="narr-c" style="border-left-color:#f59e0b"><div class="t">👀 다음 주 볼 것</div><div class="b">${d.watch.map(w => '• ' + escapeHtml(w)).join('\n')}</div></div>`;
+    h += `</div>`;
+    if((d.sources || []).length) h += `<div class="ai-src"><details><summary>출처 ${d.sources.length}건</summary>${d.sources.map(x => `<div>· <a href="${escapeHtml(x.url)}" target="_blank" rel="noopener">${escapeHtml(x.title)}</a>${x.date ? ' (' + escapeHtml(x.date) + ')' : ''}</div>`).join('')}</details></div>`;
+    slot.innerHTML = `<h3>🧠 이번 주 인사이트 <span class="h-meta">(ETF 데이터 + 뉴스 검색 · Claude 작성 · 투자 권유 아님)</span></h3>` + h;
+  }catch(e){
+    box.textContent = '아직 생성된 인사이트가 없습니다 (' + e.message + '). 매주 토요일 08:00 KST 스케줄 작업이 만듭니다.';
+  }
+}
+
 function renderInsights(){
   const body = document.getElementById('insights-body');
   if(!state.etfs.length){ body.innerHTML = '<p class="dim">데이터 없음</p>'; return; }
@@ -1497,6 +1529,10 @@ function renderInsights(){
   const addedHtml = (P.auto_added||[]).length ? `<div class="section"><h3>➕ 이번 주 자동 편입</h3>${tbl('<th class="l">ETF</th><th class="l">섹터</th><th class="l">사유</th>', P.auto_added.map(a => `<tr><td class="l name-c">${navLink(a.code, a.name)}</td><td class="l sec-c">${escapeHtml(a.sector)}</td><td class="l sec-c">${escapeHtml(a.reason)}</td></tr>`).join(''))}</div>` : '';
 
   body.innerHTML = `
+    <div class="section" id="ai-ins-slot">
+      <h3>🧠 이번 주 인사이트 <span class="h-meta">(ETF 데이터 + 뉴스 검색 · Claude 작성 · 투자 권유 아님)</span></h3>
+      <div class="ai-meta">불러오는 중…</div>
+    </div>
     <div class="section">
       <h3>📊 전체 시장 스냅샷 <span class="h-meta">(주식형 ${I.overview[0] ? I.overview[0].n : state.etfs.length}개 ETF · 평균 수익률 · 상승 종목 비중 — 크로스에셋·심리지표 제외)</span></h3>
       ${overviewHtml}
@@ -1562,6 +1598,7 @@ function renderInsights(){
       이 분석은 가격 데이터 기반 단순 룰 산출이며 투자 권유가 아닙니다.
     </p>
   `;
+  loadAiInsight();
 }
 
 function openInsightsModal(){
